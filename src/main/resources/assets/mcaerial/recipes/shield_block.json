@@ -1,0 +1,31 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "SOS",
+        "OSO",
+        "SOS"
+    ],
+    
+    "key":
+    {
+        "O":
+        {
+            "item": "mcaerial:obsidian_orb"
+        },
+        
+        "S":
+        {
+            "item": "minecraft:stone", "data": 0
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "mcaerial:shield_block",
+        "count": 1
+    }
+}
+

@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "RRR",
+        "RRR",
+        "RRR"
+    ],
+    
+    "key":
+    {
+        "R":
+        {
+            "item": "mcaerial:ruby"
+        }
+    },
+    
+    "result":
+    {
+        "item": "mcaerial:ruby_block",
+        "count": 1
+    }
+}
+

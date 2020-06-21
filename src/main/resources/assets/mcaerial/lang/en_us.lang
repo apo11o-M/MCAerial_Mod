@@ -1,0 +1,16 @@
+
+//Items
+item.ruby.name=Ruby
+item.obsidian_orb.name=Obsidian Orb
+
+//Blocks
+tile.ruby_block.name=Block of Ruby
+tile.shield_block.name=Shield Block
+tile.firefly_jar_block.name=Firefly Jar
+
+
+//Tools
+item.obsidian_sword.name=Obsidian Sword
+
+//Creative Tabs
+itemGroup.tutorial_mod_tab=Aerial Mod

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mcaerial",
+  "name": "MCAerial Mod",
+  "description": "Added Helicopters, planes, and tanks",
+  "version": "1.12.2",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["rickwang577"],
+  "credits": "Made possible by many help and tutorials!",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
