@@ -3,6 +3,7 @@
 ### What is this?
 MCAerial is a minecraft mod that adds a few planes, helicopters, and land vehicles into the game.
 
+
 ### How to Install?
 Download Link
 1. Make sure you have already installed Minecraft Forge 1.12.2
@@ -15,12 +16,12 @@ Download Link
 
 
 ### Get Started
-
 1. Clone mod repository
 2. Download Forge
-3. Setup: Run [gradle] in repository root: `gradle setupDecompWorkspace eclipse`
-4. Build: Run [gradle] in the repository root: `gradle build`
+3. Setup: Run [gradle] in repository root: ``gradle setupDecompWorkspace eclipse``
+4. Build: Run [gradle] in the repository root: ``gradle build``
 5. A more detailed instruction will be in the [src folder](https://github.com/apo11o-M/MCAerial_Mod/tree/readme/src)
+
 
 ### Issue Reports
 Please include the following:
