@@ -10,13 +10,13 @@ import rickwang577.mcaerial.blocks.FireflyJarBlock;
 import rickwang577.mcaerial.blocks.RubyBlock;
 import rickwang577.mcaerial.blocks.ShieldBlock;
 
-public class ModBlocks {
+public class BlockInit {
 	
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 	
 	public static final Block RUBY_BLOCK = new RubyBlock("ruby_block", Material.IRON);
 	public static final Block SHIELD_BLOCK = new ShieldBlock("shield_block", Material.IRON);
-	public static final Block FIREFLY_JAR_BLOCK = new FireflyJarBlock("firefly_jar_block", Material.GOURD);
+	public static final Block FIREFLY_JAR_BLOCK = new FireflyJarBlock("firefly_jar_block", Material.GLASS);
 	
 	
 	

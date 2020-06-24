@@ -3,7 +3,7 @@ package rickwang577.mcaerial.items.tools;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item.ToolMaterial;
 import rickwang577.mcaerial.Main;
-import rickwang577.mcaerial.init.ModItems;
+import rickwang577.mcaerial.init.ItemInit;
 import rickwang577.mcaerial.util.IHasModel;
 import net.minecraft.item.ItemSword;
 
@@ -13,9 +13,9 @@ public class ToolSword extends ItemSword implements IHasModel {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(ModItems.TUTORIALMODTAB);
+		setCreativeTab(ItemInit.MCAERIALMODTAB);
 		
-		ModItems.ITEMS.add(this);
+		ItemInit.ITEMS.add(this);
 		
 	}
 	

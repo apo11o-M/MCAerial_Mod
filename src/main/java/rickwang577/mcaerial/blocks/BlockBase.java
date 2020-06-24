@@ -6,8 +6,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import rickwang577.mcaerial.Main;
-import rickwang577.mcaerial.init.ModBlocks;
-import rickwang577.mcaerial.init.ModItems;
+import rickwang577.mcaerial.init.BlockInit;
+import rickwang577.mcaerial.init.ItemInit;
 import rickwang577.mcaerial.util.IHasModel;
 
 public class BlockBase extends Block implements IHasModel {
@@ -16,11 +16,11 @@ public class BlockBase extends Block implements IHasModel {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(ModItems.TUTORIALMODTAB);
+		setCreativeTab(ItemInit.MCAERIALMODTAB);
 		
-		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		
+		BlockInit.BLOCKS.add(this);
+		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+
 	}
 
 	@Override
