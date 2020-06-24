@@ -12,11 +12,11 @@ import net.minecraftforge.common.util.EnumHelper;
 import rickwang577.mcaerial.items.ItemBase;
 import rickwang577.mcaerial.items.tools.ToolSword;
 
-public class ModItems {
+public class ItemInit {
 
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	
-	public static final CreativeTabs TUTORIALMODTAB = new CreativeTabs("tutorial_mod_tab"){
+	public static final CreativeTabs MCAERIALMODTAB = new CreativeTabs("mcaerial_mod_tab"){
 		
 		@Override
 		public ItemStack getTabIconItem() {
