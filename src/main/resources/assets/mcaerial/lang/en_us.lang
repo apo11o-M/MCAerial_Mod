@@ -1,16 +1,19 @@
 
-//Items
-item.ruby.name=Ruby
-item.obsidian_orb.name=Obsidian Orb
-
 //Blocks
 tile.ruby_block.name=Block of Ruby
 tile.shield_block.name=Shield Block
 tile.firefly_jar_block.name=Firefly Jar
 
+//Items
+item.ruby.name=Ruby
+item.obsidian_orb.name=Obsidian Orb
 
 //Tools
 item.obsidian_sword.name=Obsidian Sword
 
+//Entity
+entity.centaur.name=Centaur
+item.spawn_egg.entity.centaur.name=Centaur Spawn Egg
+
 //Creative Tabs
-itemGroup.tutorial_mod_tab=Aerial Mod
+itemGroup.mcaerial_mod_tab=Aerial Mod

@@ -8,7 +8,6 @@ public class ShieldBlock extends BlockBase {
 	public ShieldBlock(String name, Material material) {
 		super(name, material);
 		setHarvestLevel("pickaxe", 3);
-		setLightLevel(0.5F);
 		setResistance(2000F);
 		setHardness(50);
 		

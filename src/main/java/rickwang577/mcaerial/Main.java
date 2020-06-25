@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import rickwang577.mcaerial.proxy.CommonProxy;
 import rickwang577.mcaerial.util.Reference;
+import rickwang577.mcaerial.util.handlers.RegistryHandler;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
 public class Main {
@@ -22,6 +23,7 @@ public class Main {
 	
 	@EventHandler
 	public static void PreInit(FMLPreInitializationEvent event) {
+		RegistryHandler.preInitRegistries(event);
 		
 	}
 	

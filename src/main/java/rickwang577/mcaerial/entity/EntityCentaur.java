@@ -12,7 +12,7 @@ public class EntityCentaur extends EntityCow {
 
 	public EntityCentaur(World worldIn) {
 		super(worldIn);
-		this.setSize(0.9F,  2.8F);
+		this.setSize(0.9F, 2.8F);
 
 	}
 	
