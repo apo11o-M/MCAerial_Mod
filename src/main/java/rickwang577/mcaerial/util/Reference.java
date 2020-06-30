@@ -11,6 +11,7 @@ public class Reference {
 	
 	public static final int ENTITY_CENTAUR = 120;
 	public static final int ENTITY_CART = 100;
+	public static final int ENTITY_VEHICLE = 110;
 	
 	
 }

@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import rickwang577.mcaerial.proxy.CommonProxy;
 import rickwang577.mcaerial.util.Reference;
 import rickwang577.mcaerial.util.handlers.RegistryHandler;
+import rickwang577.mcaerial.util.handlers.RenderHandler;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
 public class Main {
@@ -20,18 +21,23 @@ public class Main {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
 	public static CommonProxy proxy;
 	
+
+	// Do more research on this init thing
+	// why three? why not just one?
+	@EventHandler
+	public static void preInit(FMLPreInitializationEvent event) {
+		RegistryHandler.preInitRegistries(event);
+		RenderHandler.registerEntityRenders();
+		
+	}
 	
 	@EventHandler
-	public static void PreInit(FMLPreInitializationEvent event) {
-		RegistryHandler.preInitRegistries(event);
+	public static void init(FMLInitializationEvent event) {
 		
 	}
 	
-	public static void Init(FMLInitializationEvent event) {
-		
-	}
-	
-	public static void PostInit(FMLPostInitializationEvent event) {
+	@EventHandler
+	public static void postInit(FMLPostInitializationEvent event) {
 		
 	}
 }

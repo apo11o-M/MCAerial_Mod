@@ -15,16 +15,20 @@ import rickwang577.mcaerial.util.IHasModel;
 @EventBusSubscriber
 public class RegistryHandler {
 
+	// Register the Items
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(ItemInit.ITEMS.toArray(new Item[0]));
 	}
 	
+	// Register the Blocks
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
 	}
 	
+	
+	// Register the Model of Items and Blocks
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event) {
 		for(Item item : ItemInit.ITEMS) {
@@ -33,7 +37,6 @@ public class RegistryHandler {
 				
 			}
 		}
-		
 		for(Block block : BlockInit.BLOCKS) {
 			if (block instanceof IHasModel) {
 				((IHasModel)block).registerModels();
@@ -41,6 +44,7 @@ public class RegistryHandler {
 		}
 	}
 	
+	// Register the Entities and The RenderHandler
 	public static void preInitRegistries(FMLPreInitializationEvent event) {
 		EntityInit.registerEntities();
 		RenderHandler.registerEntityRenders();
