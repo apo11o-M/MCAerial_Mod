@@ -25,11 +25,11 @@ public class EntityVehicle extends Entity {
 	public boolean inputBack = false;
 	public boolean inputLeft = false;
 	
-	float rad = this.rotationYaw;
-
+	public double countE;
+	
 	public EntityVehicle(World worldIn) {
 		super(worldIn);
-		setSize(1F, 0.5F);
+		setSize(1F, 0.6F);
 
 	}
 	
@@ -56,6 +56,10 @@ public class EntityVehicle extends Entity {
 			}
 			
 			this.updateMotion();
+			
+			countE++;
+			System.out.println("Entity count: " + countE);
+			
 			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 		}
     }
@@ -64,31 +68,36 @@ public class EntityVehicle extends Entity {
 	public void updateMotion() {
 		double rotX;
 		double rotZ;		
-		double speed = 0.05;
+		double speed = 0.15;
 		
 		// rotate the entity by a small amount
 		if ((inputRight && inputForward) || (inputLeft && inputBack)) {
-			rad += 3.5;
+			this.rotationYaw += 3.5;
+				// default 3.5
 		} else if ((inputLeft && inputForward) || (inputRight && inputBack)) {
-			rad -= 3.5;
+			this.rotationYaw -= 3.5;
+				// default 3.5
 		} 
 		
 		// the number 0.017453292F is equal to pi/180, which represents one degree angle in radians
-		rotX  = -MathHelper.sin(rad * 0.017453292F);
-		rotZ  =  MathHelper.cos(rad * 0.017453292F);
+		rotX  = -MathHelper.sin(this.rotationYaw * 0.017453292F);
+		rotZ  =  MathHelper.cos(this.rotationYaw * 0.017453292F);
 		
 		// move forward/ backward
 		if (inputForward) {
 			this.motionX += speed * rotX;
 			this.motionZ += speed * rotZ;
 		} else if (inputBack) {
-			this.motionX -= speed * rotX;
-			this.motionZ -= speed * rotZ;
+			this.motionX -= speed * rotX * 0.3;
+			this.motionZ -= speed * rotZ * 0.3;
 		}
 		
+		// simulate gravity
+		this.motionY -= 0.07;
+		
 		// add terrain resistance
-		this.motionX *= 0.90;
-		this.motionZ *= 0.90;
+		this.motionX *= 0.80;
+		this.motionZ *= 0.80;
 
 	}
 	
@@ -107,7 +116,7 @@ public class EntityVehicle extends Entity {
 	
 	@Override
 	public boolean canBePushed() {
-		return true;
+		return false;
 	}
 	
 	
@@ -179,7 +188,7 @@ public class EntityVehicle extends Entity {
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox() {
-		return null;
+		return this.getEntityBoundingBox();
 	}
 	
 	

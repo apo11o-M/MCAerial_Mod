@@ -38,8 +38,7 @@ public class RenderHandler {
 			}
 			
 		});
-		
-		
+			
 		
 	}
 	
