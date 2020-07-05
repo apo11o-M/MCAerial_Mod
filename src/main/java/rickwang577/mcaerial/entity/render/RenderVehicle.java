@@ -1,6 +1,7 @@
 package rickwang577.mcaerial.entity.render;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,12 +13,8 @@ import rickwang577.mcaerial.entity.model.ModelVehicle;
 import rickwang577.mcaerial.util.Reference;
 
 public class RenderVehicle extends Render<EntityVehicle> {
-
-	public double count = 0;
-	
 	
 	public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/entities/vehicle.png");
-	
 	private ModelBase mainModel;
 	
 	public RenderVehicle(RenderManager manager, ModelBase modelBaseIn, float shadowSizeIn) {
@@ -31,21 +28,36 @@ public class RenderVehicle extends Render<EntityVehicle> {
     public void doRender(EntityVehicle entity, double x, double y, double z, float entityYaw, float partialTicks) {
         GlStateManager.pushMatrix();
         
-		GlStateManager.translate(x, y + 3.15F, z);
-		GlStateManager.rotate(-entity.rotationYaw, 0, 1, 0);
-		GlStateManager.rotate(180F, 1, 0, 0);
-
-		bindTexture(TEXTURES);		
+        float f = this.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks);
+        
+        this.translatePosition(x, y, z);
+        this.applyRotations(entity, f, partialTicks);
+				
+		bindTexture(TEXTURES);
 		bindEntityTexture(entity);
-		        
-		mainModel.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.13F);		
-		
-		count++;
-		System.out.println("Render count: " + count);
-		
-        GlStateManager.popMatrix();
-	}
 
+		mainModel.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.13F);		
+        GlStateManager.popMatrix();
+
+	}
+	
+	
+	protected void translatePosition(double x, double y, double z) {
+		GlStateManager.translate(x, y + 3.15F, z);
+	}
+	
+	
+	protected float interpolateRotation(float prevYawOffset, float yawOffset, float partialTicks) {
+        float f = yawOffset - prevYawOffset;
+        return prevYawOffset + partialTicks * f;
+    }
+	
+    
+    protected void applyRotations(Entity entity, float rotationYaw, float partialTicks) {
+		GlStateManager.rotate(180F, 1, 0, 0);
+        GlStateManager.rotate(rotationYaw, 0.0F, 1.0F, 0.0F);
+
+    }
 	
 	@Override
 	protected ResourceLocation getEntityTexture(EntityVehicle entity) {

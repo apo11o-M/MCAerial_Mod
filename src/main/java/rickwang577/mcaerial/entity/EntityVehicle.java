@@ -20,20 +20,34 @@ import net.minecraft.world.World;
 
 public class EntityVehicle extends Entity {
 	
+	public float renderYawOffset;
+	public float prevRenderYawOffset;
+	
 	public boolean inputForward = false;
 	public boolean inputRight = false;
 	public boolean inputBack = false;
 	public boolean inputLeft = false;
 	
-	public double countE;
+	public int count = 0;
+	
 	
 	public EntityVehicle(World worldIn) {
 		super(worldIn);
-		setSize(1F, 0.6F);
-
+		this.setSize(1F, 0.6F);
+		this.stepHeight = 0.6F;
+		this.setSilent(true);
 	}
 	
+	// update the entity every ticks
+	@Override
+	public void onEntityUpdate() {
+		super.onEntityUpdate();
 
+		this.prevRenderYawOffset = this.renderYawOffset;
+		this.renderYawOffset = this.rotationYaw;
+	}
+	
+	// updates the entity's position and logic
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
@@ -57,9 +71,6 @@ public class EntityVehicle extends Entity {
 			
 			this.updateMotion();
 			
-			countE++;
-			System.out.println("Entity count: " + countE);
-			
 			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 		}
     }
@@ -68,7 +79,7 @@ public class EntityVehicle extends Entity {
 	public void updateMotion() {
 		double rotX;
 		double rotZ;		
-		double speed = 0.15;
+		double speed = 0.12;
 		
 		// rotate the entity by a small amount
 		if ((inputRight && inputForward) || (inputLeft && inputBack)) {
@@ -96,8 +107,8 @@ public class EntityVehicle extends Entity {
 		this.motionY -= 0.07;
 		
 		// add terrain resistance
-		this.motionX *= 0.80;
-		this.motionZ *= 0.80;
+		this.motionX *= 0.75;
+		this.motionZ *= 0.75;
 
 	}
 	
