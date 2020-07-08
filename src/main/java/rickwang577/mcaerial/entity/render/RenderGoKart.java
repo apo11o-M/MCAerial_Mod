@@ -10,15 +10,15 @@ import net.minecraft.util.ResourceLocation;
 import rickwang577.mcaerial.entity.EntityGoKart;
 import rickwang577.mcaerial.util.Reference;
 
-public class RenderVehicle extends Render<EntityGoKart> {
+public class RenderGoKart extends Render<EntityGoKart> {
 	
 	public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/entities/go_kart.png");
 	private ModelBase mainModel;
 	
-	public RenderVehicle(RenderManager manager, ModelBase modelBaseIn, float shadowSizeIn) {
+	public RenderGoKart(RenderManager manager, ModelBase modelBaseIn) {
 		super(manager);
 		this.mainModel = modelBaseIn;
-		this.shadowSize = shadowSizeIn;
+		this.shadowSize = 0.5F;
 	}
 	
 	

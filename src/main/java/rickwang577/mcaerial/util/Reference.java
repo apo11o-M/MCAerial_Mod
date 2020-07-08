@@ -10,6 +10,6 @@ public class Reference {
 	public static final String COMMON_PROXY_CLASS = "rickwang577.mcaerial.proxy.CommonProxy";
 	
 	public static final int ENTITY_GO_KART = 110;
-	public static final int ENTITY_PLANE = 100;
+	public static final int ENTITY_PLANE = 111;
 	
 }
