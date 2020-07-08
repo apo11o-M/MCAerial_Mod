@@ -2,6 +2,8 @@ package rickwang577.mcaerial.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -54,6 +56,27 @@ public class EntityPlane extends GeneralEntity {
 			
 		}
 		
+		
+	}
+
+
+	@Override
+	protected void entityInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected void readEntityFromNBT(NBTTagCompound compound) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected void writeEntityToNBT(NBTTagCompound compound) {
+		// TODO Auto-generated method stub
 		
 	}
 	
