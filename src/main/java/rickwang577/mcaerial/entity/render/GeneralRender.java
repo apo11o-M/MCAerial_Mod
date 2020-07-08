@@ -7,11 +7,12 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import rickwang577.mcaerial.entity.EntityVehicle;
-import rickwang577.mcaerial.entity.model.ModelVehicle;
+import rickwang577.mcaerial.entity.EntityGoKart;
+import rickwang577.mcaerial.entity.GeneralEntity;
+import rickwang577.mcaerial.entity.model.ModelGoKart;
 import rickwang577.mcaerial.util.Reference;
 
-public class GeneralRender extends Render<EntityVehicle> {
+public class GeneralRender extends Render<GeneralEntity> {
 		
 	protected ModelBase mainModel;
 	protected float scale;
@@ -23,8 +24,7 @@ public class GeneralRender extends Render<EntityVehicle> {
 	}
 	
 	
-	@Override
-    public void doRender(EntityVehicle entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void doRender(EntityGoKart entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		// documentations about the partial ticks and more
         GlStateManager.pushMatrix();
         
@@ -67,8 +67,13 @@ public class GeneralRender extends Render<EntityVehicle> {
     }
 	
     
-	@Override
-	protected ResourceLocation getEntityTexture(EntityVehicle entity) {
+	protected ResourceLocation getEntityTexture(EntityGoKart entity) {
+		return null;
+	}
+
+
+	protected ResourceLocation getEntityTexture(GeneralEntity entity) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

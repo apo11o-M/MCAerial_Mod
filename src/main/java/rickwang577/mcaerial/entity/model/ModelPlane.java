@@ -5,14 +5,14 @@ import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelVehicle extends ModelBase {
+public class ModelPlane extends ModelBase {
 	private final ModelRenderer left_main;
 	private final ModelRenderer right_main;
 	private final ModelRenderer wheels;
 	private final ModelRenderer slope;
 	private final ModelRenderer center;
 
-	public ModelVehicle() {
+	public ModelPlane() {
 		textureWidth = 128;
 		textureHeight = 128;
 

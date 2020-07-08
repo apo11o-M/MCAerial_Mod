@@ -9,9 +9,7 @@ public class Reference {
 	public static final String CLIENT_PROXY_CLASS = "rickwang577.mcaerial.proxy.ClientProxy";
 	public static final String COMMON_PROXY_CLASS = "rickwang577.mcaerial.proxy.CommonProxy";
 	
-	public static final int ENTITY_CENTAUR = 120;
-	public static final int ENTITY_CART = 100;
-	public static final int ENTITY_VEHICLE = 110;
-	
+	public static final int ENTITY_GO_KART = 110;
+	public static final int ENTITY_PLANE = 100;
 	
 }

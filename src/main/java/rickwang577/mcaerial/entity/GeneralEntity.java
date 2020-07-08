@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 
 public class GeneralEntity extends Entity {
 	
+	public GameSettings settings = Minecraft.getMinecraft().gameSettings;
 	public float renderYawOffset;
 	public float prevRenderYawOffset;
 	public float renderPitchOffset;
@@ -30,7 +31,7 @@ public class GeneralEntity extends Entity {
 	public boolean inputLeft = false;
 	public boolean inputSpace = false;
 	//public boolean inputCargo = false;
-	
+		
 	public GeneralEntity(World worldIn) {
 		super(worldIn);
 	}
@@ -74,7 +75,6 @@ public class GeneralEntity extends Entity {
 	 */
 	protected void updateInput() {
 		if (this.getControllingPassenger() instanceof EntityPlayer) {
-			GameSettings settings = Minecraft.getMinecraft().gameSettings;
 			this.inputForward = settings.keyBindForward.isKeyDown();
 			this.inputRight = settings.keyBindRight.isKeyDown();
 			this.inputBack = settings.keyBindBack.isKeyDown();

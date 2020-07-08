@@ -12,8 +12,8 @@ item.obsidian_orb.name=Obsidian Orb
 item.obsidian_sword.name=Obsidian Sword
 
 //Entity
-entity.centaur.name=Centaur
-item.spawn_egg.entity.centaur.name=Centaur Spawn Egg
+entity.go_kart.name=Go Kart
+entity.plane.name=Plane
 
 //Creative Tabs
 itemGroup.mcaerial_mod_tab=Aerial Mod

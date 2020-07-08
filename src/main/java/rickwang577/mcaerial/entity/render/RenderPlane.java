@@ -7,15 +7,15 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import rickwang577.mcaerial.entity.EntityVehicle;
-import rickwang577.mcaerial.entity.model.ModelVehicle;
+import rickwang577.mcaerial.entity.EntityGoKart;
+import rickwang577.mcaerial.entity.model.ModelGoKart;
 import rickwang577.mcaerial.util.Reference;
 
-public class RenderVehicle extends GeneralRender {
+public class RenderPlane extends GeneralRender {
 	
-	public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/entities/vehicle.png");
+	public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/entities/go_kart.png");
 	
-	public RenderVehicle(RenderManager manager, ModelBase modelBaseIn, float shadowSizeIn) {
+	public RenderPlane(RenderManager manager, ModelBase modelBaseIn, float shadowSizeIn) {
 		super(manager);
 		this.mainModel = modelBaseIn;
 		this.shadowSize = shadowSizeIn;
@@ -34,7 +34,7 @@ public class RenderVehicle extends GeneralRender {
     }
 	
 	@Override
-	protected ResourceLocation getEntityTexture(EntityVehicle entity) {
+	protected ResourceLocation getEntityTexture(EntityGoKart entity) {
 		return TEXTURES;
 	}
 

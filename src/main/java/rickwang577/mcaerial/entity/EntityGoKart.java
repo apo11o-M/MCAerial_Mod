@@ -18,23 +18,24 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityVehicle extends GeneralEntity {
+public class EntityGoKart extends GeneralEntity {
 		
 	private double turningAngle = 3.5;
+	double speed = 0.15;
 	
-	public EntityVehicle(World worldIn) {
+	public EntityGoKart(World worldIn) {
 		super(worldIn);
 		this.setSize(1F, 0.6F);
-		this.stepHeight = 0.6F;
 		this.setSilent(true);
+		this.stepHeight = 0.6F;
+
 	}
 	
 	
 	@Override
 	public void updateMotion() {
 		double rotX;
-		double rotZ;		
-		double speed = 0.15;
+		double rotZ;	
 		
 		// rotate the entity by a small amount
 		if ((inputRight && inputForward) || (inputLeft && inputBack)) {
@@ -44,8 +45,8 @@ public class EntityVehicle extends GeneralEntity {
 		} 
 		
 		// the number 0.017453292F is equal to pi/180, which represents one degree angle in radians
-		rotX  = -MathHelper.sin(this.rotationYaw * 0.017453292F);
-		rotZ  =  MathHelper.cos(this.rotationYaw * 0.017453292F);
+		rotX = -MathHelper.sin(this.rotationYaw * 0.017453292F);
+		rotZ =  MathHelper.cos(this.rotationYaw * 0.017453292F);
 		
 		// move forward/ backward
 		if (inputForward) {
