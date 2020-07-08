@@ -10,8 +10,14 @@ import net.minecraft.world.World;
 public class EntityPlane extends GeneralEntity {
 
 	public double speed;
+	public double speedIncrement = 0.05;
 	public double maxSpeed = 0.6;
-	float defaultMouseSen;
+	
+	private float defaultMouseSen;
+	private double rotX;
+	private double rotZ;
+	private double rotY;
+	
 	
 	public EntityPlane(World worldIn) {
 		super(worldIn);
@@ -25,38 +31,39 @@ public class EntityPlane extends GeneralEntity {
 	@Override
 	public void onEntityUpdate() {
 		super.onEntityUpdate();
-		
 		if (isBeingRidden()) {
-			settings.mouseSensitivity = 0.1F;
+			settings.mouseSensitivity = 0.15F;
 			this.rotationPitch = this.getControllingPassenger().rotationPitch;
 			this.rotationYaw = this.getControllingPassenger().rotationYaw;
 		} else {
 			settings.mouseSensitivity = defaultMouseSen;
 		}
-		
 	}
 	
 	
 	@Override
-	public void updateMotion() {
-		double rotX;
-		double rotZ;
-		double rotY;
+	public void updateMotion() {	
+		// the number 0.017453292F is equal to pi/180, which represents one degree angle in radians
+		rotX = -MathHelper.sin(this.rotationYaw * 0.017453292F);
+		rotZ =  MathHelper.cos(this.rotationYaw * 0.017453292F);
+		rotY = -MathHelper.sin(this.rotationPitch * 0.017453292F);
 		
-		if (speed < 0.4) {
-			// the number 0.017453292F is equal to pi/180, which represents one degree angle in radians
-			rotX = -MathHelper.sin(this.rotationYaw * 0.017453292F);
-			rotZ =  MathHelper.cos(this.rotationYaw * 0.017453292F);
-			rotY = -MathHelper.sin(this.rotationPitch * 0.017453292F);
+		if (inputForward && speed < 0.3) {
+			this.motionX += (speed + speedIncrement) * rotX;
+			this.motionZ += (speed + speedIncrement) * rotZ;
+			this.motionY += (speed + speedIncrement) * rotY;
+
 			
-			this.motionX += speed;
-			
-		} else {
-			System.out.println("bruh");
+		} else if (0.3 <= speed || speed < maxSpeed) {
 			
 		}
 		
+		//this.motionY -= 0.07;
 		
+		this.motionX *= 0.85;
+		this.motionZ *= 0.85;
+		this.motionY *= 0.75;
+
 	}
 
 

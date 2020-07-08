@@ -6,7 +6,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import rickwang577.mcaerial.entity.EntityGoKart;
 import rickwang577.mcaerial.entity.model.ModelGoKart;
-import rickwang577.mcaerial.entity.render.RenderVehicle;
+import rickwang577.mcaerial.entity.render.RenderGoKart;
 
 public class RenderHandler {
 	
@@ -15,7 +15,7 @@ public class RenderHandler {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGoKart.class, new IRenderFactory<EntityGoKart>() {
 			@Override
 			public Render<? super EntityGoKart> createRenderFor(RenderManager manager) {
-				return new RenderVehicle(manager, new ModelGoKart(), 0.5F);
+				return new RenderGoKart(manager, new ModelGoKart());
 			}
 		
 		});
