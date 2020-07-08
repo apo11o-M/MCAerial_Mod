@@ -1,4 +1,4 @@
-package rickwang577.mcaerial.entity;
+	package rickwang577.mcaerial.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
