@@ -1,5 +1,7 @@
 package rickwang577.mcaerial;
 
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -22,10 +24,9 @@ public class Main {
 	public static CommonProxy proxy;
 	
 
-	// Do more research on this init thing
-	// why three? why not just one?
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
+		OBJLoader.INSTANCE.addDomain(Reference.MOD_ID);
 		RegistryHandler.preInitRegistries(event);
 		RenderHandler.registerEntityRenders();
 		

@@ -11,5 +11,5 @@ public class Reference {
 	
 	public static final int ENTITY_GO_KART = 110;
 	public static final int ENTITY_PLANE = 111;
-
+	
 }

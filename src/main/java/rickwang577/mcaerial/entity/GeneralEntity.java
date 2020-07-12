@@ -25,11 +25,11 @@ public class GeneralEntity extends Entity {
 	public float prevRenderYawOffset;
 	public float renderPitchOffset;
 	public float prevRenderPitchOffset;
-	public boolean inputForward = false;
-	public boolean inputRight = false;
-	public boolean inputBack = false;
-	public boolean inputLeft = false;
-	public boolean inputSpace = false;
+	protected boolean inputForward = false;
+	protected boolean inputRight = false;
+	protected boolean inputBack = false;
+	protected boolean inputLeft = false;
+	protected boolean inputSpace = false;
 	//public boolean inputCargo = false;
 		
 	public GeneralEntity(World worldIn) {

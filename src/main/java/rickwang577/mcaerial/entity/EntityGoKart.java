@@ -20,8 +20,8 @@ import net.minecraft.world.World;
 
 public class EntityGoKart extends GeneralEntity {
 	
-	private double turningAngle = 3.5;
-	double speed = 0.15;
+	protected double turningAngle = 3.5;
+	protected double speed = 0.15;
 	
 	public EntityGoKart(World worldIn) {
 		super(worldIn);
