@@ -26,7 +26,7 @@ public class Main {
 
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-		OBJLoader.INSTANCE.addDomain(Reference.MOD_ID);
+		//OBJLoader.INSTANCE.addDomain(Reference.MOD_ID);
 		RegistryHandler.preInitRegistries(event);
 		RenderHandler.registerEntityRenders();
 		
