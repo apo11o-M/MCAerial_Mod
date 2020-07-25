@@ -1,5 +1,7 @@
 package rickwang577.mcaerial;
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.Mod;
@@ -9,6 +11,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import rickwang577.mcaerial.init.ItemInit;
+import rickwang577.mcaerial.items.ItemPlane;
 import rickwang577.mcaerial.proxy.CommonProxy;
 import rickwang577.mcaerial.util.Reference;
 import rickwang577.mcaerial.util.handlers.RegistryHandler;
@@ -26,7 +30,8 @@ public class Main {
 
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-		//OBJLoader.INSTANCE.addDomain(Reference.MOD_ID);
+		OBJLoader.INSTANCE.addDomain(Reference.MOD_ID);
+		
 		RegistryHandler.preInitRegistries(event);
 		RenderHandler.registerEntityRenders();
 		

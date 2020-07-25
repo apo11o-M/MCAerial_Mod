@@ -40,7 +40,7 @@ public class RenderGoKart extends Render<EntityGoKart> {
 		bindEntityTexture(entity);
 
 		mainModel.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.13F);		
-        GlStateManager.popMatrix();
+        GlStateManager.popMatrix(); 
 
 	}
 	

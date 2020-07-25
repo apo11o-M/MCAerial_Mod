@@ -1,0 +1,6 @@
+{
+   "parent": "item/generated",
+   "textures": {
+       "layer0": "mcaerial:items/plane_spawn_egg"
+   }
+}

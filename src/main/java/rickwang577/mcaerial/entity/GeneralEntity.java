@@ -25,6 +25,11 @@ public class GeneralEntity extends Entity {
 	public float prevRenderYawOffset;
 	public float renderPitchOffset;
 	public float prevRenderPitchOffset;
+	public float renderRollOffset;
+	public float prevRenderRollOffset;
+	
+	/** Entity rotation roll, similar to rotation pitch/ yaw */
+	public float rotationRoll;
 	protected boolean inputForward = false;
 	protected boolean inputRight = false;
 	protected boolean inputBack = false;
@@ -46,6 +51,8 @@ public class GeneralEntity extends Entity {
 		this.renderYawOffset = this.rotationYaw;
 		this.prevRenderPitchOffset = this.renderPitchOffset;
 		this.renderPitchOffset = this.rotationPitch;
+		this.prevRenderRollOffset = this.renderRollOffset;
+		this.renderRollOffset = this.rotationRoll;
 		
 	}
 	
@@ -91,6 +98,63 @@ public class GeneralEntity extends Entity {
 	}
 	
 	
+	/**
+	 * Return the X component of rotationYaw
+	 */
+	public static float getXVectorComp(float rotationYaw) {
+			// the number 0.017453292F is equal to pi/180, which represents one degree angle in radians		
+		return -MathHelper.sin(rotationYaw * 0.017453292F);
+	}
+	
+	
+	/**
+	 * Return the Z component of rotationYaw
+	 */
+	public static float getZVectorComp(float rotationYaw) {
+		return MathHelper.cos(rotationYaw * 0.017453292F);
+	}
+	
+	
+	/**
+	 * Return the Y component of rotationPitch
+	 */
+	public static float getYVectorComp(float rotationPitch) {
+		return -MathHelper.sin(rotationPitch * 0.017453292F);
+	}
+	
+	
+	/**
+	 * Return vector components(rotX & rotZ) that is perpendicular to the given virtual axis
+	 */
+	
+/*
+	public static float[] getPerpendicular(float rotX, float rotZ) {
+		float[] result = new float[2];
+		// new x component
+		result[0] = 1;
+		// new z component
+		result[1] = rotX/ -rotZ;
+		return normalize(result);
+	}
+		
+*/	
+	/**
+	 * Normalize the vector into a length of 1
+	 */
+/*
+	private static float[] normalize(float[] input) {
+		double d0 = (double) MathHelper.sqrt(input[0] * input[0] + input[1] * input[1]);
+		if (d0 > 1.0E-4D) {
+			input[0] /= d0;
+			input[1] /= d0;
+		} else {
+			input[0] = 0;
+			input[1] = 0;
+		}
+		return input;
+	}
+*/	
+
 	@Override
 	public boolean canBeCollidedWith() {
 		return !this.isDead;

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.util.EnumHelper;
 import rickwang577.mcaerial.items.ItemBase;
+import rickwang577.mcaerial.items.ItemPlane;
 import rickwang577.mcaerial.items.tools.ToolSword;
 
 public class ItemInit {
@@ -33,7 +34,7 @@ public class ItemInit {
 	// Items
 	public static final Item RUBY = new ItemBase("ruby");
 	public static final Item OBSIDIAN_ORB = new ItemBase("obsidian_orb");
-	
+	public static final Item PLANE_SPAWN_EGG = new ItemPlane("plane_spawn_egg");
 	
 	// Tools
 	public static final ItemSword OBSIDIAN_SWORD = new ToolSword("obsidian_sword", MATERIAL_OBSIDIAN_ORB);

@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import rickwang577.mcaerial.init.BlockInit;
 import rickwang577.mcaerial.init.EntityInit;
 import rickwang577.mcaerial.init.ItemInit;
+import rickwang577.mcaerial.items.ItemPlane;
 import rickwang577.mcaerial.util.IHasModel;
 
 @EventBusSubscriber

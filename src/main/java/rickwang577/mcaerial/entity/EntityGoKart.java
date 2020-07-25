@@ -31,24 +31,16 @@ public class EntityGoKart extends GeneralEntity {
 
 	}
 	
-	
 	@Override
 	public void updateMotion() {
-		double rotX;
-		double rotZ;	
+		double rotX = GeneralEntity.getXVectorComp(this.rotationYaw);
+		double rotZ	= GeneralEntity.getZVectorComp(this.rotationYaw);
 		
-		// rotate the entity by a small amount
 		if ((inputRight && inputForward) || (inputLeft && inputBack)) {
 			this.rotationYaw += turningAngle;
 		} else if ((inputLeft && inputForward) || (inputRight && inputBack)) {
 			this.rotationYaw -= turningAngle;
 		} 
-		
-		// the number 0.017453292F is equal to pi/180, which represents one degree angle in radians
-		rotX = -MathHelper.sin(this.rotationYaw * 0.017453292F);
-		rotZ =  MathHelper.cos(this.rotationYaw * 0.017453292F);
-		
-		// move forward/ backward
 		if (inputForward) {
 			this.motionX += speed * rotX;
 			this.motionZ += speed * rotZ;
@@ -65,7 +57,6 @@ public class EntityGoKart extends GeneralEntity {
 		this.motionZ *= 0.75;
 
 	}
-	
 	
 	@Override
 	protected void entityInit() {
