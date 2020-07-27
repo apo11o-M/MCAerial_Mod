@@ -30,9 +30,10 @@ public class EntityPlane extends GeneralEntity {
 
 	public EntityPlane(World worldIn) {
 		super(worldIn);
-		this.setSize(1F, 0.6F);
+		this.setSize(1F, 0.7F);
 		this.stepHeight = 0.6F;
-		if (settings.mouseSensitivity < 0) {
+		this.ignoreFrustumCheck = true;
+		if (settings.mouseSensitivity < 0 || settings.mouseSensitivity >= 1.5F) {
 			defaultMouseSen = 1.0F;
 		} else {
 			defaultMouseSen = settings.mouseSensitivity;
@@ -126,6 +127,12 @@ public class EntityPlane extends GeneralEntity {
 		}	
 	}
 	
+/*
+	@Override
+	public void updateRiderPosition() {
+		
+	}
+*/	
 	@Override
 	protected void entityInit() {
 		

@@ -33,7 +33,8 @@ public class RenderGoKart extends Render<EntityGoKart> {
         float f = this.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks);
         
         // Be sure to translate the entity's position first, and then do the rotation
-        this.translatePosition(x, y, z);
+		GlStateManager.translate(x, y + 3.15F, z);
+
         this.applyRotations(entity, f, partialTicks);
 				
 		bindTexture(TEXTURES);
@@ -43,14 +44,6 @@ public class RenderGoKart extends Render<EntityGoKart> {
         GlStateManager.popMatrix(); 
 
 	}
-	
-	/**
-	 * Translate the model's position based on the entity's current position in the world
-	 */
-	protected void translatePosition(double x, double y, double z) {
-		GlStateManager.translate(x, y + 3.15F, z);
-	}
-	
 	
 	/**
 	 * Calculate the angle for the partial ticks rotation

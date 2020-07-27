@@ -36,39 +36,46 @@ public class RenderPlane extends Render<EntityPlane> {
         entity.fPitch = interpolateRotation(entity.prevRenderPitchOffset, entity.renderPitchOffset, partialTicks);
 		entity.fRoll = interpolateRotation(entity.prevRenderRollOffset, entity.renderRollOffset, partialTicks);
 		
-        // Be sure to translate the entity's position first, and then do the rotation
-		GlStateManager.translate(x, y + 3.15F, z);
-        this.applyRotations(entity, entity.fYaw, entity.fPitch, entity.fRoll);
-				
+		GlStateManager.translate(x, y + 3.82F, z);
+		
+		this.applyRotations(entity, x, y, z, entity.fYaw, entity.fPitch, entity.fRoll);
+        
 		bindTexture(TEXTURES);
 		bindEntityTexture(entity);
 
-		mainModel.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.13F);		
+		mainModel.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.15F);		
         GlStateManager.popMatrix();
         
 	}
 	
 	/**
-	 * Interpolate the angle of the model based on the previous offsets and partial ticks
-	 */
-	protected float interpolateRotation(float prevOffset, float offset, float partialTicks) {
-        float f = offset - prevOffset;
-        return prevOffset + partialTicks * f;
-    }
-	
-	/**
 	 * Apply the rotations to the plane model
 	 */
-    protected void applyRotations(EntityPlane entity, float rotationYaw, float rotationPitch, float rotationRoll) {
+    protected void applyRotations(EntityPlane entity, double x, double y, double z, float rotationYaw, float rotationPitch, float rotationRoll) {
 		GlStateManager.rotate(180F, 1, 0, 0);
-        
+
+        // translate the model to change its pivot position from feet to eyes
+		GlStateManager.translate(0, 2.5F, 0);
+			// GlStateManager.translate(0, 3.5F, 0);
+		
         // rotate in the yaw direction
         GlStateManager.rotate(rotationYaw, 0.0F, 1.0F, 0.0F);
         // rotate in the pitch direction
         GlStateManager.rotate(rotationPitch, 1.0F, 0.0F, 0.0F);
         // rotate in the roll direction
         GlStateManager.rotate(-rotationRoll, 0.0F, 0.0F, 1.0F);
-
+  		
+        // translate the model back to its original position
+        GlStateManager.translate(0, -2.5F, 0);
+	
+    }
+    
+	/**
+	 * Interpolate the angle of the model based on the previous offsets and partial ticks
+	 */
+	protected float interpolateRotation(float prevOffset, float offset, float partialTicks) {
+        float f = offset - prevOffset;
+        return prevOffset + partialTicks * f;
     }
 	
 	@Override

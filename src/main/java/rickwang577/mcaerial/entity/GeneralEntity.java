@@ -97,7 +97,6 @@ public class GeneralEntity extends Entity {
 		}
 	}
 	
-	
 	/**
 	 * Return the X component of rotationYaw
 	 */
@@ -106,7 +105,6 @@ public class GeneralEntity extends Entity {
 		return -MathHelper.sin(rotationYaw * 0.017453292F);
 	}
 	
-	
 	/**
 	 * Return the Z component of rotationYaw
 	 */
@@ -114,88 +112,47 @@ public class GeneralEntity extends Entity {
 		return MathHelper.cos(rotationYaw * 0.017453292F);
 	}
 	
-	
 	/**
 	 * Return the Y component of rotationPitch
 	 */
 	public static float getYVectorComp(float rotationPitch) {
 		return -MathHelper.sin(rotationPitch * 0.017453292F);
 	}
-	
-	
-	/**
-	 * Return vector components(rotX & rotZ) that is perpendicular to the given virtual axis
-	 */
-	
-/*
-	public static float[] getPerpendicular(float rotX, float rotZ) {
-		float[] result = new float[2];
-		// new x component
-		result[0] = 1;
-		// new z component
-		result[1] = rotX/ -rotZ;
-		return normalize(result);
-	}
-		
-*/	
-	/**
-	 * Normalize the vector into a length of 1
-	 */
-/*
-	private static float[] normalize(float[] input) {
-		double d0 = (double) MathHelper.sqrt(input[0] * input[0] + input[1] * input[1]);
-		if (d0 > 1.0E-4D) {
-			input[0] /= d0;
-			input[1] /= d0;
-		} else {
-			input[0] = 0;
-			input[1] = 0;
-		}
-		return input;
-	}
-*/	
 
 	@Override
 	public boolean canBeCollidedWith() {
 		return !this.isDead;
 	}
 	
-	
 	@Override
 	public boolean canBePushed() {
 		return false;
 	}
-	
 	
 	@Override
 	protected boolean canBeRidden(Entity entityIn) {
 		return true;
 	}
 	
-	
 	@Override
 	public boolean canRiderInteract() {
 		return true;
 	}
-	
 	
 	@Override
 	public boolean shouldDismountInWater(Entity rider) {
 		return false;
 	}
 	
-	
 	@Override
 	public double getMountedYOffset() {
 		return 0.0d;
 	}
 	
-	
 	@Override
 	public boolean canPassengerSteer() {
 		return getControllingPassenger() instanceof EntityPlayer;
 	}
-	
 	
 	@Override
 	public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
@@ -209,12 +166,10 @@ public class GeneralEntity extends Entity {
 		}
 	}
 	
-	
 	@Override
 	public AxisAlignedBB getCollisionBox(Entity entityIn) {
 		return getEntityBoundingBox();
 	}
-	
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -225,25 +180,21 @@ public class GeneralEntity extends Entity {
 		return false;
 	}
 	
-	
 	@Override
 	public Entity getControllingPassenger() {
 		List<Entity> list = this.getPassengers();
 		return list.isEmpty() ? null : (Entity) list.get(0);
 	}
 	
-	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox() {
 		return this.getEntityBoundingBox();
 	}
 	
-	
 	@Override
 	protected void entityInit() {
 		
 	}
-	
 	
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound) {

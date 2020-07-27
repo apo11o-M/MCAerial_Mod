@@ -41,21 +41,35 @@ public class EventHandlers {
 	@SubscribeEvent
 	public static void onPlayerRideRender(RenderPlayerEvent.Pre event) {
 		if (event.getEntity().getRidingEntity() instanceof EntityPlane) {
-			EntityPlayer player = (EntityPlayer) event.getEntity();
 			EntityPlane plane = (EntityPlane) event.getEntity().getRidingEntity();
 			GlStateManager.pushMatrix();
+			
+			float x = (float) event.getX();
+			float y = (float) event.getY();
+			float z = (float) event.getZ();
 			
 	        // rotate in the yaw direction for the virtual axis
 	        GlStateManager.rotate(-plane.fYaw, 0.0F, 1.0F, 0.0F);
 	        
+	        // translate the player's model to fit the riding position
+	        GlStateManager.translate(x, y + 0.2F, z);
+	        
+	        // translate the model to change its pivot position to the player's eye position
+			GlStateManager.translate(x, y + 1.47F, z);
+				//GlStateManager.translate(x, y + 0.6F, z);
+			
 	        // rotate in the pitch direction
 	        GlStateManager.rotate(plane.fPitch, 1.0F, 0.0F, 0.0F);	        
 	        // rotate in the roll direction
 	        GlStateManager.rotate(plane.fRoll, 0.0F, 0.0F, 1.0F);
 	        
+	        // translate the model back to its original position
+			GlStateManager.translate(x, y - 1.47F, z);
+	
 	        // rotate back to undo the yaw rotation
 	        GlStateManager.rotate(plane.fYaw, 0.0F, 1.0F, 0.0F);
-
+	        	// shoutout to this dude on this post: shorturl.at/cgvwO
+	        
 			needToPop = true;
 		}
 	}
