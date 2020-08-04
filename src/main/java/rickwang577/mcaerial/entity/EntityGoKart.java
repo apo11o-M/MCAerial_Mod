@@ -40,7 +40,7 @@ public class EntityGoKart extends GeneralEntity {
 			this.rotationYaw += turningAngle;
 		} else if ((inputLeft && inputForward) || (inputRight && inputBack)) {
 			this.rotationYaw -= turningAngle;
-		} 
+		} 			
 		if (inputForward) {
 			this.motionX += speed * rotX;
 			this.motionZ += speed * rotZ;

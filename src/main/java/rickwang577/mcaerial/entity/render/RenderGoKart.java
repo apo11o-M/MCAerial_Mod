@@ -35,7 +35,7 @@ public class RenderGoKart extends Render<EntityGoKart> {
         // Be sure to translate the entity's position first, and then do the rotation
 		GlStateManager.translate(x, y + 3.15F, z);
 
-        this.applyRotations(entity, f, partialTicks);
+        this.applyRotations(entity, f);
 				
 		bindTexture(TEXTURES);
 		bindEntityTexture(entity);
@@ -57,7 +57,7 @@ public class RenderGoKart extends Render<EntityGoKart> {
 	/**
 	 * Rotate the model by that angle
 	 */
-    protected void applyRotations(Entity entity, float rotationYaw, float partialTicks) {
+    protected void applyRotations(Entity entity, float rotationYaw) {
 		GlStateManager.rotate(180F, 1, 0, 0);
         GlStateManager.rotate(rotationYaw, 0.0F, 1.0F, 0.0F);
 
