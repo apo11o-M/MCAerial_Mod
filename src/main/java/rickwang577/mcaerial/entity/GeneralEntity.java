@@ -27,7 +27,6 @@ public class GeneralEntity extends Entity {
 	public float prevRenderPitchOffset;
 	public float renderRollOffset;
 	public float prevRenderRollOffset;
-	
 	/** Entity rotation roll, similar to rotation pitch/ yaw */
 	public float rotationRoll;
 	protected boolean inputForward = false;
@@ -36,7 +35,7 @@ public class GeneralEntity extends Entity {
 	protected boolean inputLeft = false;
 	protected boolean inputSpace = false;
 	//public boolean inputCargo = false;
-		
+	
 	public GeneralEntity(World worldIn) {
 		super(worldIn);
 	}
@@ -53,7 +52,7 @@ public class GeneralEntity extends Entity {
 		this.renderPitchOffset = this.rotationPitch;
 		this.prevRenderRollOffset = this.renderRollOffset;
 		this.renderRollOffset = this.rotationRoll;
-		
+
 	}
 	
 	/**
