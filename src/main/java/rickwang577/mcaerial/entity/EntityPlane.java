@@ -17,7 +17,9 @@ import rickwang577.mcaerial.util.Reference;
 public class EntityPlane extends GeneralEntity {	
 	
 	public boolean inAir = false;
+	/** the speed vector magnitude */
 	public double speed = 0;
+	/** the vehicle's acceleration */
 	protected double speedIncrement = 0.007;
 	protected double speedTakeoff = 0.4;
 	protected double speedMax = 1.5;
@@ -75,8 +77,8 @@ public class EntityPlane extends GeneralEntity {
 	
 	@Override
 	public void updateMotion() {	
-		rotX = GeneralEntity.getXVectorComp(this.rotationYaw);
-		rotZ = GeneralEntity.getZVectorComp(this.rotationYaw);
+		rotX = GeneralEntity.getXVectorComp(this.rotationYaw, this.rotationPitch);
+		rotZ = GeneralEntity.getZVectorComp(this.rotationYaw, this.rotationPitch);
 		rotY = GeneralEntity.getYVectorComp(this.rotationPitch);
 		
 		if (speed < speedTakeoff) {

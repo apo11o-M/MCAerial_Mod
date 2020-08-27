@@ -5,7 +5,8 @@ import net.minecraft.world.World;
 public class EntityGoKart extends GeneralEntity {
 	
 	protected double turningAngle = 3.5;
-	protected double speed = 0.15;
+	/** the top speed of the vehicle */
+	protected double speedMax = 0.15;
 	
 	public EntityGoKart(World worldIn) {
 		super(worldIn);
@@ -17,8 +18,8 @@ public class EntityGoKart extends GeneralEntity {
 	
 	@Override
 	public void updateMotion() {
-		double rotX = GeneralEntity.getXVectorComp(this.rotationYaw);
-		double rotZ	= GeneralEntity.getZVectorComp(this.rotationYaw);
+		double rotX = GeneralEntity.getXVectorComp(this.rotationYaw, 0);
+		double rotZ	= GeneralEntity.getZVectorComp(this.rotationYaw, 0);
 		
 		if ((inputRight && inputForward) || (inputLeft && inputBack)) {
 			this.rotationYaw += turningAngle;
@@ -26,11 +27,11 @@ public class EntityGoKart extends GeneralEntity {
 			this.rotationYaw -= turningAngle;
 		} 			
 		if (inputForward) {
-			this.motionX += speed * rotX;
-			this.motionZ += speed * rotZ;
+			this.motionX += speedMax * rotX;
+			this.motionZ += speedMax * rotZ;
 		} else if (inputBack) {
-			this.motionX -= speed * rotX * 0.3;
-			this.motionZ -= speed * rotZ * 0.3;
+			this.motionX -= speedMax * rotX * 0.3;
+			this.motionZ -= speedMax * rotZ * 0.3;
 		}
 		
 		// simulate gravity

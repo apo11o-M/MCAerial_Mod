@@ -26,10 +26,10 @@ public class EventHandlers {
 	@SubscribeEvent
 	public static void entityPlaneRollEvent(CameraSetup event) {
 		if (event.getEntity().getRidingEntity() instanceof EntityPlane) {
-			EntityPlane temp = (EntityPlane)event.getEntity().getRidingEntity();
-			event.setRoll(temp.fRoll);
-			if (!temp.inAir) {
-				event.setYaw(temp.fYaw + 180);
+			EntityPlane plane = (EntityPlane)event.getEntity().getRidingEntity();
+			event.setRoll(plane.fRoll);
+			if (!plane.inAir) {
+				event.setYaw(plane.fYaw + 180);
 			}	
 		}
 	}

@@ -14,12 +14,13 @@ public class BlockInit {
 	
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 	
+	// normal blocks
 	public static final Block RUBY_BLOCK = new RubyBlock("ruby_block", Material.IRON);
 	public static final Block SHIELD_BLOCK = new ShieldBlock("shield_block", Material.IRON);
 	public static final Block FIREFLY_JAR_BLOCK = new FireflyJarBlock("firefly_jar_block", Material.GLASS);
 	
-	
-	
-	
+	// tile entities
+	//public static final Block  
+		
 
 }

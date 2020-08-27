@@ -84,8 +84,8 @@ public class EntityPlaneVector extends GeneralEntity {
 				this.getControllingPassenger().rotationPitch = this.rotationPitch;
 				this.getControllingPassenger().rotationYaw = this.rotationYaw;
 				
-				vector[0][0] = this.getXVectorComp(this.rotationYaw);
-				vector[1][0] = this.getZVectorComp(this.rotationYaw);
+				vector[0][0] = this.getXVectorComp(this.rotationYaw, 0);
+				vector[1][0] = this.getZVectorComp(this.rotationYaw, 0);
 				
 				//System.out.println("vector: " + Arrays.deepToString(vector));
 				
@@ -137,8 +137,8 @@ public class EntityPlaneVector extends GeneralEntity {
 	
 	@Override
 	public void updateMotion() {	
-		rotX = GeneralEntity.getXVectorComp(this.rotationYaw);
-		rotZ = GeneralEntity.getZVectorComp(this.rotationYaw);
+		rotX = GeneralEntity.getXVectorComp(this.rotationYaw, this.rotationPitch);
+		rotZ = GeneralEntity.getZVectorComp(this.rotationYaw, this.rotationPitch);
 		rotY = GeneralEntity.getYVectorComp(this.rotationPitch);
 		
 		if (speed < speedTakeoff) {

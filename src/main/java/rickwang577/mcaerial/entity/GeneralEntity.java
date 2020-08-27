@@ -35,7 +35,7 @@ public class GeneralEntity extends Entity {
 	protected boolean inputLeft = false;
 	protected boolean inputSpace = false;
 	//public boolean inputCargo = false;
-	
+		
 	public GeneralEntity(World worldIn) {
 		super(worldIn);
 	}
@@ -96,23 +96,23 @@ public class GeneralEntity extends Entity {
 		}
 	}
 	
+
 	/**
-	 * Return the X component of rotationYaw
+	 * Return the X component of the vector
 	 */
-	public static float getXVectorComp(float rotationYaw) {
-			// the number 0.017453292F is equal to pi/180, which represents one degree angle in radians		
-		return -MathHelper.sin(rotationYaw * 0.017453292F);
+	public static float getXVectorComp(float rotationYaw, float rotationPitch) {
+		return -MathHelper.sin(rotationYaw * 0.017453292F) * MathHelper.cos(rotationPitch * 0.017453292F);
 	}
 	
 	/**
-	 * Return the Z component of rotationYaw
+	 * Return the Z component of the vector
 	 */
-	public static float getZVectorComp(float rotationYaw) {
-		return MathHelper.cos(rotationYaw * 0.017453292F);
+	public static float getZVectorComp(float rotationYaw, float rotationPitch) {
+		return MathHelper.cos(rotationYaw * 0.017453292F) * MathHelper.cos(rotationPitch * 0.017453292F);
 	}
 	
 	/**
-	 * Return the Y component of rotationPitch
+	 * Return the Y component of the vector
 	 */
 	public static float getYVectorComp(float rotationPitch) {
 		return -MathHelper.sin(rotationPitch * 0.017453292F);
