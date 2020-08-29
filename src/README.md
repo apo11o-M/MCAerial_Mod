@@ -1,48 +1,62 @@
 # MCAerial Mod Documentation
-This is the documentation for the MCAerial Mod. It will explain the concept of Minecraft and Forge
+This is the documentation for the MCAerial Mod, Minecraft, and Forge.
+
+It's intention is a note for myself as I learned & progress throughout minecraft modding, and it captures my best explanations and practices on those topics.
 
 I also posted some of the most helpful guides and tutorials I found throughout the internet in the bottom of this page. Be sure to check them out!!
 
-## Concepts
-### Sides
-Here's [Grey's very helpful explanation](http://greyminecraftcoder.blogspot.com/2013/10/client-server-communication-using.html) on the client and server division.
+## Sides
+The minecraft code can be divided into two "sides" - Client and Server
+  - The Server side is responsible for running the game logic (mob spawning, weather, updating inventories, health, AI, etc), maintaining the master copy of the world - updating the blocks and entities based on packets received from the client, and sending updated information to all the clients.
+  - The Client side is primarily responsible for reading input from the player and for rendering the screen.
 
-Note: you can skip this part if you just want to add some blocks and items to minecraft as it doesn’t interfere with the server side.
+In a minecraft single player world, there is one server and one client both running in your computer. In multiplayer mode, there is one server but with multiple clients(players) connect to it.
 
-### Initialization
-During startup, Forge will call your mod several times to add new blocks, items, read configuration files, and integrateitself into the game by registering your classes in the appropriate location.
+In order to distinguish between client and server, you use the boolean check `world.isRemote` to check sides. If the field is `true`, the world is currently running on the logical client. If the field is `false`, then the world is running on the logical server.
+
+Now you may ask: *why do we need to check the sides?*
+
+It's because we have to ensure that the game logic and other mechanics only runs on the server side, such as damaging the player every time they walk on your block, or have your machine process dirt into diamonds. Applying game logic to the client side could cause desynchronization (ghost entities, desynchronized stats, etc) in the lightest case, and crashes in the worst case.
+
+More details can be found on [here](http://greyminecraftcoder.blogspot.com/2013/10/client-server-communication-using.html).
+
+## Initialization
+During startup, Forge will call your mod several times to add new blocks, items, read configuration files, and integrate itself into the game by registering your classes in the appropriate location.
 
 - PreInitialization - Run before anything else. Read your config, create blocks, items, etc, and register them within the GameRegistry.
 
-- Initialization - Do your mod setup. Build whatever data structures you care about. Register recipes.
+- Initialization - Do your mod setup. Build whatever data structures you care about, and register recipes.
 
 - PostInitialization - Handle interaction with other mods.
 
 PreInitialization is performed for all the mods you installed, followed by Initialization for all mods, followed by PostInitialization for all mods. Initializing the mods in `init()` is particularly useful when there might be interactions between multiple mods
 
-### Registry Handler
+## Registry Handler
 Registration is the process of taking the objects of a mod (items, blocks, entities, sounds, etc.) and making them known to the game. Registering things is important, as without registration the game will simply not know about these objects in a mod and will exhibit great amounts of unexplainable behavior (and probably crash). The registry process happens in `preInit()`.
 
 More details can be found on the [Forge Documentation](https://mcforge.readthedocs.io/en/1.12.x/concepts/registries/)
 
-### Items
+## Items
 Basic items that do not need and special functionality or attributes do not need a custom class. It’s also recommended to create your mod’s general item class since you can put all your custom items and blocks into a dedicated tab in creative mode.
 
-#### Common issue:
+### Common issue:
 You implemented the recipes but nothing shows up when you’re in the game. It’s possible that you did not specify the state of the blocks you're using (this mostly happens with stone, dirt, or colored wool as those blocks have different states). Simply add `"data": 0` to the end of the block id to and it should fix the issue. `"item": "minecraft:stone", "data": 0`
 
-### Blocks
+## Blocks
 For simple blocks (think of cobblestone, dirt, grass, wood, etc.) which do not need any special functionality or attributes, a custom class is not necessary. It’s also recommended to create a general block class for your mod for reasons mentioned above.
 
 If you want more functionality (such as interactions with players) then a custom class is required. The `Block` class has many methods that you can implement to your custom block class.
 
-#### ItemBlock
+One thing to note about blocks is the boundary boxes(hitbox). if one wants to create a block that has a smaller bounding box than a regular full block such as half slabs, then in the block class one would have to declare a new object called `AxisAlignedBB` and override the `getBoundingBox()` method to return the `AxisAlignedBB` field you just declared.
+
+### ItemBlock
 `ItemBlock` is a subclass of `Item` and has a field `block` that holds a reference to the block it presents.
 
 A block with `Block` class but not `ItemBlock` class will be impossible to hold in inventory. (like `minecraft:water` exists as a block but can’t hold in an inventory)
+
 A more detailed document can be found [here](https://mcforge.readthedocs.io/en/1.12.x/blocks/blocks/).
 
-### Entity
+## Entity
 Entities are one of the most interesting concept in minecraft, and it's so broad, that this doc can't fit every single bit of info into it. So instead, I picked out some of the most important concepts in this class.
 
 `motionX`, `motionY`, `motionZ` - these three fields determines the motion/speed towards the corresponding axis. This is very useful for making vehicles such as cars or airplanes.
@@ -53,16 +67,18 @@ For `rotationYaw`, 0 degrees at north (Z axis, negative), clockwise is positive,
 
 For `rotationPitch`, 0 degrees at horizontal, look down is positive, look up is negative. So the range is from 180 to -180 degrees
 
-`rotationRoll` - Minecraft does not have rotationRoll integrated into the game, so if one wants to create roll effect, you would have to create it by yourself. Most of the time we use `rotationRoll` for rotating the model and the player's camera, and rotating the player's camera can be done using the `CameraSetup` event. It allows mods to alter the angle of the player's camera in the yaw, pitch, and roll direction.
+`rotationRoll` - Minecraft does not have rotationRoll integrated into the game, so if one wants to create roll effect, you would have to done it by yourself. Most of the time we use `rotationRoll` for rotating the model and the player's camera.
+
+Rotating the player's model can be done using `RenderPlayerEvent` (see more in [RenderPlayer](https://github.com/apo11o-M/MCAerial_Mod/tree/master/src#renderplayer) ). As for rotating the player's camera, it can be done using the `CameraSetup` event which allows the mod to alter the angle of the player's camera in the yaw, pitch, and roll direction.
 
 `ignoreFrustumCheck` - Since minecraft only render entities whom bounding box are in the player's view, for those whose model significantly exceeds the bounding box, we can set `ignoreFrustumCheck = true` in the constructor so that minecraft will always render the entity's model.
 
-### EventHandlers
+## EventHandlers
 Minecraft Forge provides event buses that are extremely useful for modders. The general concept is that you create "event handling" methods that subscribe a particular event, and being fired every time that event happens.
 
 One example is the `PlayerUseItemEvent` where the player right clicks while holding an item. The dev can program that something happens when the player is holding a specific item and right clicks.
 
-Here's [Jabelar's tutorial](http://jabelarminecraft.blogspot.com/p/minecraft-forge-172-event-handling.html) on Minecraft Event Handling.
+Here's [Jabelar's guide](http://jabelarminecraft.blogspot.com/p/minecraft-forge-172-event-handling.html) on Minecraft Event Handling.
 
 
 ## Rendering Models
@@ -73,17 +89,17 @@ The purpose of the rendering class is to render the model and the texture of the
 
 The model's rotation is done by using `GlStatemanager.rotate(angle, x, y, z)`. Note the angle is in degrees, and the `x`, `y`, and `z` field indicates which axis the model rotates. Ex. `GlStatemanager.rotate(90F, 0.0F, 1.0F, 0.0F)` means rotate 90 degrees clockwise about the y axis.
 
-#### Partial Ticks
+### Partial Ticks
 Another important concept about rendering is partial ticks. Entities update every 0.05 seconds(1 tick), but the rendering class updates every frame, which is about 60fps for a normal computer. If we only change the rotation for the model every 0.05 seconds then it will have an unpleasant stuttering/ choppy effect. To fix this, we have to interpolate the rotating angle between the first frame and the second frame and rotate the model by that amount as the `doRender` method is called upon every frame in minecraft.
 
-#### RenderPlayer
+### RenderPlayer
 The pivot point of the player's model is located in the center of the feet, and if one want to change the pivot point, just translate the model first, do the rotation, and then translate back. The player model dimension can be found [here](https://www.reddit.com/r/Minecraft/comments/143xdt/how_tall_is_steve/).
 
 One thing to note is that when the program run `GlStateManager.pushMatrix()` in your `RenderPlayerEvent.Pre` event, all of the virtual axis minecraft did previously will be reseted ([Euler Angle Explained](https://en.wikipedia.org/wiki/Euler_angles)), so if we want to rotate the player's model in the pitch and roll direction, we will have to rotate the model in the corresponding yaw angle first, do the pitch and roll, and then undo the yaw rotation we did by rotating in the reverse direction.
 
 Also, be sure to have a variable that indicates the program to pop the matrix in the `RenderPlayerEvent.Post` event. Pop the matrix in the `RenderPlayerEvent.Pre` event will cause GLStackUnderflow error.
 
-So the entire player model rotation process look like this:
+So the entire player model rotation process in the `RenderPlayerEvent.Pre` event looks like this:
   1. pushMatrix
   2. rotate in the yaw direction for the virtual axis
   3. translate the model to its pivot point
@@ -91,7 +107,7 @@ So the entire player model rotation process look like this:
   5. translate the model back
   6. undo step two by applying the same rotation but in opposite direction  
 
-[Bedrock_Miner](https://bedrockminer.jimdofree.com/modding-tutorials/advanced-modding/vanilla-rendering/) has a detailed guide on rendering objects
+[Bedrock_Miner](https://bedrockminer.jimdofree.com/modding-tutorials/advanced-modding/vanilla-rendering/) has a detailed guide on using `GlStateManager` class
 
 ### Model Files (.java & .obj files)
 A model is simply a shape. Most models in minecraft are .json files and only a few use .obj files as obj is older and doesn’t support many features like animation, materials and lights.
@@ -101,21 +117,25 @@ I also suggest downloading the JSON Editor Plugin from Eclipse marketplace. The 
 ### Texture Files (.png files)
 The texture size must be a square and a power of 2, such as 16x16, 32x32, 64x64 etc.
 
-### Common issues
-If one of the textures is broken, look at the json file. 90% of times a broken texture is because of a faulty json file.
+Common issues:
+  - If one of the textures is broken, look at the json file. 90% of times a broken texture is because of a faulty json file.
 
-If the texture works in the inventory but not on the ground, check the spelling and run the json validator on the json file in `assets.[youmodname].models.block`.
+  - If the texture works in the inventory but not on the ground, check the spelling and run the json validator on the json file in `assets.[youmodname].models.block`.
 
-If the texture works when placed but not in the inventory, check the spelling and run the json validator on the json file in `assets.[yourmodname].models.item`.
+  - If the texture works when placed but not in the inventory, check the spelling and run the json validator on the json file in `assets.[yourmodname].models.item`.
 
-If the texture doesn’t work at all, check the spelling and run the json validator on the json file in `assets.[yourmodname].blockstates`.
+  - If the texture doesn’t work at all, check the spelling and run the json validator on the json file in `assets.[yourmodname].blockstates`.
 
-If the texture still doesn’t work at all, check your image file, make sure it’s in png format and square size
+  - If the texture still doesn’t work at all, check your image file, make sure it’s in png format and square size
 
 ## Exporting your mod
+
+So you just finished building you mod, and the next step is to export it as .jar file that people can use.
   1. Open you command prompt inside your mod folder
   2. Run `gradlew build`, or `bash gradlew build` if you're running on macOS
   3. Once the build is done, go to your mod folder > build > libs and there will be two files in there. The one with the word "source" is the source code of your mod. KEEP IT! It's the other one that you post online or share to others.
+
+For sharing your mod online, I suggest create an account and upload your file to [Mediafire](https://www.mediafire.com/), and it will generate a link that anyone will be able to access and download.
 
 ### Common issues
 The command prompt shows “Build fail” when you are trying to export your mod.
