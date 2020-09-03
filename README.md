@@ -5,11 +5,11 @@ MCAerial mod is a minecraft mod that adds a few planes, helicopters, and land ve
 
 It also serves as the guide to the important concepts in Minecraft and Forge. If you are anything like me, a detailed explanation with a good code example is worth or hours of online googling, and can very quickly explain the key concepts.
 
-In the source folder you will find the **[documentation](https://github.com/apo11o-M/MCAerial_Mod/tree/readme/src)** that explains the concepts of Minecraft and Forge. I tried to make the code simple and I have also left comments through out the code that explains some of the details that are not covered in the documentation.
+In the source folder you will find the **[documentation](https://github.com/apo11o-M/MCAerial_Mod/tree/master/src)** that explains the concepts of Minecraft and Forge. I tried to make the code simple and I have also left comments through out the code that explains some of the details that are not covered in the documentation.
 
 ## Getting Started
 ### Documentation
-The detailed documentation for this mod can be found in the [src folder](https://github.com/apo11o-M/MCAerial_Mod/tree/readme/src)
+The detailed documentation for this mod can be found in the [src folder](https://github.com/apo11o-M/MCAerial_Mod/tree/master/src)
 
 ### Usage
 If you just want to play around with this mod, here is the download [link](http://www.mediafire.com/file/fvy2urhd7a97f8n/MC_Aerial_Mod_v1.1.jar/file).

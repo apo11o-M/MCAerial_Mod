@@ -97,7 +97,7 @@ The pivot point of the player's model is located in the center of the feet, and 
 
 One thing to note is that when the program run `GlStateManager.pushMatrix()` in your `RenderPlayerEvent.Pre` event, all of the virtual axis minecraft did previously will be reseted ([Euler Angle Explained](https://en.wikipedia.org/wiki/Euler_angles)), so if we want to rotate the player's model in the pitch and roll direction, we will have to rotate the model in the corresponding yaw angle first, do the pitch and roll, and then undo the yaw rotation we did by rotating in the reverse direction.
 
-Also, be sure to have a variable that indicates the program to pop the matrix in the `RenderPlayerEvent.Post` event. Pop the matrix in the `RenderPlayerEvent.Pre` event will cause GLStackUnderflow error.
+Also, be sure to have a variable that indicates the program to pop the matrix in the `RenderPlayerEvent.Post` event. Popping the matrix in the `RenderPlayerEvent.Pre` event will cause GLStackUnderflow error.
 
 So the entire player model rotation process in the `RenderPlayerEvent.Pre` event looks like this:
   1. pushMatrix

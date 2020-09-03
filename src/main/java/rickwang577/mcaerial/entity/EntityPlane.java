@@ -68,7 +68,7 @@ public class EntityPlane extends GeneralEntity {
 				settings.mouseSensitivity = 0.0010F;				
 				this.rotationYaw = this.getControllingPassenger().rotationYaw;
 				this.rotationPitch = this.getControllingPassenger().rotationPitch;
-						
+				
 			}
 		} else {
 			settings.mouseSensitivity = defaultMouseSen;

@@ -11,10 +11,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import rickwang577.mcaerial.init.ItemInit;
 import rickwang577.mcaerial.items.ItemPlane;
 import rickwang577.mcaerial.proxy.CommonProxy;
 import rickwang577.mcaerial.util.Reference;
+import rickwang577.mcaerial.util.handlers.GuiHandler;
 import rickwang577.mcaerial.util.handlers.RegistryHandler;
 import rickwang577.mcaerial.util.handlers.RenderHandler;
 
@@ -30,7 +32,7 @@ public class Main {
 
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-		OBJLoader.INSTANCE.addDomain(Reference.MOD_ID);
+		//OBJLoader.INSTANCE.addDomain(Reference.MOD_ID);
 		
 		RegistryHandler.preInitRegistries(event);
 		RenderHandler.registerEntityRenders();
@@ -39,11 +41,17 @@ public class Main {
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
-		
+		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());  
+
 	}
 	
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
 		
 	}
+	
+	public enum GUI_ENUM {
+		DRAFTING_TABLE
+	}
+	
 }

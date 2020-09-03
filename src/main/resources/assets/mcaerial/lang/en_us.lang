@@ -3,7 +3,7 @@
 tile.ruby_block.name=Block of Ruby
 tile.shield_block.name=Shield Block
 tile.firefly_jar_block.name=Firefly Jar
-
+tile.drafting_table_block.name=Drafting Table
 
 //Items
 item.ruby.name=Ruby
