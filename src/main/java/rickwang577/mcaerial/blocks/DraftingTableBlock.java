@@ -16,30 +16,26 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import rickwang577.mcaerial.Main;
 
 public class DraftingTableBlock extends BlockBase 
-{
-
-    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-	
+{	
 	public DraftingTableBlock(String name, Material material) 
 	{
 		super(name, material);
-		
 	}
 	
+	/**
+	 * This method is called when the block is being right-clicked.
+	 */
 	@Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, 
     								EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) 
 	{
-		if (!worldIn.isRemote) 
-		{
+		if (!worldIn.isRemote) {
 			//DEBUG
 	        System.out.println("BlockDeconstructor onBlockActivated");
 	        playerIn.openGui(Main.instance, Main.GUI_ENUM.DRAFTING_TABLE.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
         return true;
     }
-	
-	
 	
 	
 

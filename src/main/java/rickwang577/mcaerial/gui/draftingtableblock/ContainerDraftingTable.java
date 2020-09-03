@@ -12,15 +12,19 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+/**
+ * This class handles the interaction between the player(client) and the server(the target block).     
+ * In the constructor, it creates slots using the addSlotToContainer() method and link the slot to the 
+ * block's and player's inventory. Note that we also specify the on-screen position of the slot.
+ * 
+ */
 public class ContainerDraftingTable extends Container 
 {
-
     public InventoryCrafting inputInventory = new InventoryCrafting(this, 1, 1);
-    public int inputSlotNumber;
     public InventoryDraftingResult outputInventory = new InventoryDraftingResult();
-    private final World world;
     public InventoryPlayer playerInventory;
-    
+    public int inputSlotNumber;
+    private final World world;
     
     public ContainerDraftingTable(InventoryPlayer parPlayerInventory, World worldIn, int parX, int parY, int parZ) 
     {

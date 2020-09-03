@@ -25,6 +25,9 @@ public class GuiContainerDrafting extends GuiContainer
         super.drawScreen(par1, par2, par3);
     }
 
+	/**
+	 * Render the background of the gui.
+	 */
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) 
 	{

@@ -5,8 +5,12 @@ import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 
-public class InventoryDraftingResult extends InventoryCraftResult  {
-
+/**
+ * This class is the actual list that holds the contends in the block
+ *
+ */
+public class InventoryDraftingResult extends InventoryCraftResult 
+{
 	@Override
     public int getInventoryStackLimit() {
         return 1;
