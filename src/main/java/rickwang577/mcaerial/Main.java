@@ -21,8 +21,7 @@ import rickwang577.mcaerial.util.handlers.RegistryHandler;
 import rickwang577.mcaerial.util.handlers.RenderHandler;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
-public class Main 
-{
+public class Main {
 	@Instance
 	public static Main instance;
 	
@@ -30,27 +29,23 @@ public class Main
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event) 
-	{
+	public static void preInit(FMLPreInitializationEvent event) {
 		//OBJLoader.INSTANCE.addDomain(Reference.MOD_ID);
-		
 		RegistryHandler.preInitRegistries(event);
 		RenderHandler.registerEntityRenders();
 		
 	}
 	
 	@EventHandler
-	public static void init(FMLInitializationEvent event) 
-	{
+	public static void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());  
 
 	}
 	
 	@EventHandler
-	public static void postInit(FMLPostInitializationEvent event) {}
+	public static void postInit(FMLPostInitializationEvent event) { }
 	
-	public enum GUI_ENUM 
-	{
+	public enum GUI_ENUM {
 		DRAFTING_TABLE
 	}
 	

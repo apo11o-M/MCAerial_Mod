@@ -72,9 +72,7 @@ public class GeneralEntity extends Entity {
 	/**
 	 * Update the entity's motion every tick
 	 */
-	protected void updateMotion() {
-	
-	}
+	protected void updateMotion() { }
 	
 	/**
 	 * Update the user's input every tick

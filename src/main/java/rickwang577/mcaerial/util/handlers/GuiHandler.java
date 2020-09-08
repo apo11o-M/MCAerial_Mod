@@ -17,29 +17,27 @@ import rickwang577.mcaerial.gui.draftingtableblock.GuiContainerDrafting;
  * (Container on server side, or GuiScreen on client side).
  * 
  */
-public class GuiHandler implements IGuiHandler 
-{
+public class GuiHandler implements IGuiHandler {
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World worldIn, int x, int y, int z) 
-	{
-		System.out.println("getserverguielement");
-
-		if (ID == Main.GUI_ENUM.DRAFTING_TABLE.ordinal()) 
-		{
-            return new ContainerDraftingTable(player.inventory, worldIn, x, y, z);
+	public Object getServerGuiElement(int ID, EntityPlayer player, World worldIn, int parX, int parY, int parZ) {
+		//DEBUG
+		System.out.println("GuiHandler getServerGuiElement()");
+		if (ID == Main.GUI_ENUM.DRAFTING_TABLE.ordinal()) {
+            return new ContainerDraftingTable(player.inventory, worldIn, parX, parY, parZ);
 		}
 		return null;
+		
 	}
 	
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
-	{
-		System.out.println("getclientguielement");
-		if (ID == Main.GUI_ENUM.DRAFTING_TABLE.ordinal()) 
-		{
-			return new GuiContainerDrafting(player.inventory, world,I18n.format("tile.draftingtable.name"), x, y, z);
+	public Object getClientGuiElement(int ID, EntityPlayer player, World worldIn, int parX, int parY, int parZ){
+		//DEBUG
+		System.out.println("GuiHandler getClientGuiElement()");
+		if (ID == Main.GUI_ENUM.DRAFTING_TABLE.ordinal()) {
+			return new GuiContainerDrafting(player.inventory, worldIn, I18n.format("tile.draftingtable.name"), parX, parY, parZ);
 		}
 		return null;
+		
 	}
 
 

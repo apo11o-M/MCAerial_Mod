@@ -44,8 +44,6 @@ public class EntityGoKart extends GeneralEntity {
 	}
 	
 	@Override
-	protected void entityInit() {
-		
-	}
+	protected void entityInit() { }
 	
 }

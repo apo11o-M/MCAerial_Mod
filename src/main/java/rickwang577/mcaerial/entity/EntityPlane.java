@@ -47,9 +47,9 @@ public class EntityPlane extends GeneralEntity {
 
 	}
 	
-    public EntityPlane(World worldIn, double x, double y, double z) {
+    public EntityPlane(World worldIn, double parX, double parY, double parZ) {
         this(worldIn);
-        this.setPosition(x, y, z);
+        this.setPosition(parX, parY, parZ);
     }
 	
 	@Override
@@ -139,19 +139,13 @@ public class EntityPlane extends GeneralEntity {
 	}
 	
 	@Override
-	protected void entityInit() {
-		
-	}
+	protected void entityInit() { }
 	
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
-		
-	}
+	protected void readEntityFromNBT(NBTTagCompound compound) { }
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound) {
-		
-	}	
+	protected void writeEntityToNBT(NBTTagCompound compound) { }	
 	
 	
 	

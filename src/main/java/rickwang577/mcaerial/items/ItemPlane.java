@@ -24,6 +24,8 @@ public class ItemPlane extends ItemBase  {
 	
 	public ItemPlane(String name) {
 		super(name);
+		System.out.println("name: " + name);
+
 
 	}
 	

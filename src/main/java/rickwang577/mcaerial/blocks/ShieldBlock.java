@@ -11,7 +11,6 @@ public class ShieldBlock extends BlockBase {
 		setResistance(2000F);
 		setHardness(50);
 		
-		
 	}
 
 	

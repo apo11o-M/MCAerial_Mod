@@ -15,10 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import rickwang577.mcaerial.Main;
 
-public class DraftingTableBlock extends BlockBase 
-{	
-	public DraftingTableBlock(String name, Material material) 
-	{
+public class DraftingTableBlock extends BlockBase {	
+	public DraftingTableBlock(String name, Material material) {
 		super(name, material);
 	}
 	
@@ -27,23 +25,18 @@ public class DraftingTableBlock extends BlockBase
 	 */
 	@Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, 
-    								EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) 
-	{
+    								EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		
 		if (!worldIn.isRemote) {
 			//DEBUG
 	        System.out.println("BlockDeconstructor onBlockActivated");
 	        playerIn.openGui(Main.instance, Main.GUI_ENUM.DRAFTING_TABLE.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
         return true;
-    }
-	
-	
-
     
+	}
 	
-
 	
 	
 
 }
-
