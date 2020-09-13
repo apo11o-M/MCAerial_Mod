@@ -5,6 +5,7 @@ It's intention is a note for myself as I learned & progress throughout minecraft
 
 I also posted some of the most helpful guides and tutorials I found throughout the internet in the bottom of this page. Be sure to check them out!!
 
+
 ## Sides
 The minecraft code can be divided into two "sides" - Client and Server
   - The Server side is responsible for running the game logic (mob spawning, weather, updating inventories, health, AI, etc), maintaining the master copy of the world - updating the blocks and entities based on packets received from the client, and sending updated information to all the clients.
@@ -20,6 +21,7 @@ It's because we have to ensure that the game logic and other mechanics only runs
 
 More details can be found on [here](http://greyminecraftcoder.blogspot.com/2013/10/client-server-communication-using.html).
 
+
 ## Initialization
 During startup, Forge will call your mod several times to add new blocks, items, read configuration files, and integrate itself into the game by registering your classes in the appropriate location.
 
@@ -31,16 +33,19 @@ During startup, Forge will call your mod several times to add new blocks, items,
 
 PreInitialization is performed for all the mods you installed, followed by Initialization for all mods, followed by PostInitialization for all mods. Initializing the mods in `init()` is particularly useful when there might be interactions between multiple mods
 
+
 ## Registry Handler
 Registration is the process of taking the objects of a mod (items, blocks, entities, sounds, etc.) and making them known to the game. Registering things is important, as without registration the game will simply not know about these objects in a mod and will exhibit great amounts of unexplainable behavior (and probably crash). The registry process happens in `preInit()`.
 
 More details can be found on the [Forge Documentation](https://mcforge.readthedocs.io/en/1.12.x/concepts/registries/)
+
 
 ## Items
 Basic items that do not need and special functionality or attributes do not need a custom class. It’s also recommended to create your mod’s general item class since you can put all your custom items and blocks into a dedicated tab in creative mode.
 
 ### Common issue:
 You implemented the recipes but nothing shows up when you’re in the game. It’s possible that you did not specify the state of the blocks you're using (this mostly happens with stone, dirt, or colored wool as those blocks have different states). Simply add `"data": 0` to the end of the block id to and it should fix the issue. `"item": "minecraft:stone", "data": 0`
+
 
 ## Blocks
 For simple blocks (think of cobblestone, dirt, grass, wood, etc.) which do not need any special functionality or attributes, a custom class is not necessary. It’s also recommended to create a general block class for your mod for reasons mentioned above.
@@ -56,6 +61,7 @@ A block with `Block` class but not `ItemBlock` class will be impossible to hold 
 
 A more detailed document can be found [here](https://mcforge.readthedocs.io/en/1.12.x/blocks/blocks/).
 
+
 ## Entity
 Entities are one of the most interesting concept in minecraft, and it's so broad, that this doc can't fit every single bit of info into it. So instead, I picked out some of the most important concepts in this class.
 
@@ -69,9 +75,10 @@ For `rotationPitch`, 0 degrees at horizontal, look down is positive, look up is 
 
 `rotationRoll` - Minecraft does not have rotationRoll integrated into the game, so if one wants to create roll effect, you would have to done it by yourself. Most of the time we use `rotationRoll` for rotating the model and the player's camera.
 
-Rotating the player's model can be done using `RenderPlayerEvent` (see more in [RenderPlayer](https://github.com/apo11o-M/MCAerial_Mod/tree/master/src#renderplayer) ). As for rotating the player's camera, it can be done using the `CameraSetup` event which allows the mod to alter the angle of the player's camera in the yaw, pitch, and roll direction.
+Rotating the player's model can be done using `RenderPlayerEvent` (see more in [RenderPlayer](https://github.com/apo11o-M/MCAerial_Mod/tree/master/src#renderplayer) ). As for rotating the player's camera, it can be done using the `CameraSetup` event which allows the mod to alter the angle of the player's camera in the yaw, pitch, andÂ roll direction.
 
 `ignoreFrustumCheck` - Since minecraft only render entities whom bounding box are in the player's view, for those whose model significantly exceeds the bounding box, we can set `ignoreFrustumCheck = true` in the constructor so that minecraft will always render the entity's model.
+
 
 ## EventHandlers
 Minecraft Forge provides event buses that are extremely useful for modders. The general concept is that you create "event handling" methods that subscribe a particular event, and being fired every time that event happens.
@@ -79,6 +86,74 @@ Minecraft Forge provides event buses that are extremely useful for modders. The 
 One example is the `PlayerUseItemEvent` where the player right clicks while holding an item. The dev can program that something happens when the player is holding a specific item and right clicks.
 
 Here's [Jabelar's guide](http://jabelarminecraft.blogspot.com/p/minecraft-forge-172-event-handling.html) on Minecraft Event Handling.
+
+
+## Networking
+The client and server are always connected by a network connection(packets).
+
+[Here's my guide](https://gist.github.com/apo11o-M/bec16b08a7cfa43e99820bbe625fec9b) on how to setup SimpleImpl.
+
+
+
+
+For more information go and take a look at the [Forge's documentation](https://mcforge.readthedocs.io/en/1.12.x/networking/simpleimpl/) about networking.
+
+
+## Guis
+### Getting Started
+Making blocks with guis can be confusing because there are several things that have to work together. More importantly, you may not need all the complexity depending on what you are trying to achieve.
+
+Before you start, you should know what kind of classes you would/might have to implement.
+
+#### Do you need an `IInventory`
+This class holds the information about any stuffs (items or blocks) that are contained inside the block. For example when you put a stack of coal into the furnace it is going into the block's inventory.
+
+#### Do you need a `Container`
+If your block have an `IInventory` or a custom gui then `Container` class is a must. It helps combining the inventories and sync them between the client and the server.
+
+#### Do you need a `GuiContainer`
+This is where the actual "gui stuff" goes. This class handles the rendering of your custom gui textures, and handles the gui buttons on screen.
+
+#### Do you need a `IGuiHandler`
+If you use a `Container` then `IGuiHandler` class is a must. It helps creating network packets to sync up the containers on the client and the server. The `IGuiHandler` also needs a unique GUI ID passed to it as a parameter, so I suggest creating an enum to help manage these IDs.
+
+#### Do you need a `TileEntity`
+A tile entity is like a variation of a regular block with IInventory. It is particularly useful if you want to gui to continue to do something even when it isn't open. For example a furnace will continue to cook something even if you are not in the gui.
+
+Examples where no tile entity is needed:
+
+- A simple block that just displays some information in the GUI, like maybe a sign that displays your mod's credits or help info.
+- A block where the processing happens instantaneously like a crafting table.
+
+Examples where a tile entity is recommended:
+- A block where processing happens over time like cooking in a furnace.
+
+### Implementing Classes
+#### `IInventory`
+This is fairly simple as we typically just need to extend the existing IInventory classes such as the `InventoryCraftingResult` or the `InventoryEnderChest`. The `IInventory` class is essentially a list that stores a bunch of `ItemStacks` and with many other helper methods that manipulates the list.
+
+#### `Container`
+As stated above, this is the class than handles the interactions between the player(client) and the server.
+
+In the constructor we creates `Slots` using the `addSlotToContainer()` method and link the slot to the block's and player's inventory. The slots are the translucent boxes you see when you hover your mouse over some of the container block's guis. It is capable to connect with both the player's and the block's inventory. Note that we also have to specify the on-screen position of the slot.
+
+One thing to note is the `transferStackInSlot()` method. It has to be implemented by the modders since the inherited method doesn't do anything. This method is called when the player wants to move an itemstack from one slot to another. This includes left clicks and shift-clicks. Failure to consider the possibilities would result in weird inventory behaviors such as itemstacks disappearing or even mc stuck in a infinite for loop.
+
+#### `GuiContainer`
+This class specifies the layout of the gui, render the background images, retrives items and progress bars for display, amd more.
+
+There are multiple gui drawing methods in the `GUI` class, and each of them have different usages and parameters. For my texture I am using the `drawModalRectWithCustomSizedTexture()` since my texture size is not the minecraft default 176x166 pixels texture size.
+
+To add buttons to the gui, we have to initialize it in the `initGui()` method, create an if block with the button's id, and perform the actions for each buttons.
+
+It's also important to not offset the textures and buttons by absolute pixels, but rather use proportions based on the screen size. This is because each person has different monitor/screen sizes, and different UI size settings. If we uses absolute pixels to off set their position it's very easy to mess up the entire layout for a different window size setting.
+
+Warning: This class only runs on the CLIENT SIDE, so if you want to do stuff that would relate to the server side such as adding items into certain slots, you would have to send a packet to the server side and add the item over there or else your gui would have desyncing issues. I have an example of setting up packets and IMessages in [Networking]().
+
+#### `IGuiHandler`
+The IGuiHandler provides the Synchronization of the slot contents between the server and client and lets you avoid having to create custom packets. Basically it provides an association between the Container on the server side and the GuiScreen on the client side.
+
+The class check the enumerated ID that is passed into the methods and return the associated element (Container on the server side, or GuiScreen on the client side).
 
 
 ## Rendering Models
@@ -128,8 +203,8 @@ Common issues:
 
   - If the texture still doesn’t work at all, check your image file, make sure it’s in png format and square size
 
-## Exporting your mod
 
+## Exporting your mod
 So you just finished building you mod, and the next step is to export it as .jar file that people can use.
   1. Open you command prompt inside your mod folder
   2. Run `gradlew build`, or `bash gradlew build` if you're running on macOS
@@ -143,6 +218,7 @@ The command prompt shows “Build fail” when you are trying to export your mod
 `Execution failed for task ':processResources'`
 This is due to an issue with forge 1.12.2 and your mcmod.info file. Change the mcversion from 1.12.2 to mcversion (...yeah) and it should fix the crash.
 `"mcversion": "${mcversion}"`
+
 
 ## Very Helpful Guides/Links
   - [Forge Documentation (1.12.2)](https://mcforge.readthedocs.io/en/1.12.x/) - The official Forge documentation for minecraft 1.12.2 version
