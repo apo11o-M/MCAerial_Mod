@@ -17,6 +17,7 @@ import rickwang577.mcaerial.items.ItemPlane;
 import rickwang577.mcaerial.proxy.CommonProxy;
 import rickwang577.mcaerial.util.Reference;
 import rickwang577.mcaerial.util.handlers.GuiHandler;
+import rickwang577.mcaerial.util.handlers.PacketHandler;
 import rickwang577.mcaerial.util.handlers.RegistryHandler;
 import rickwang577.mcaerial.util.handlers.RenderHandler;
 
@@ -39,6 +40,7 @@ public class Main {
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());  
+		PacketHandler.initPackets();
 
 	}
 	
