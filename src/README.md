@@ -93,9 +93,6 @@ The client and server are always connected by a network connection(packets).
 
 [Here's my guide](https://gist.github.com/apo11o-M/bec16b08a7cfa43e99820bbe625fec9b) on how to setup SimpleImpl.
 
-
-
-
 For more information go and take a look at the [Forge's documentation](https://mcforge.readthedocs.io/en/1.12.x/networking/simpleimpl/) about networking.
 
 
@@ -144,11 +141,13 @@ This class specifies the layout of the gui, render the background images, retriv
 
 There are multiple gui drawing methods in the `GUI` class, and each of them have different usages and parameters. For my texture I am using the `drawModalRectWithCustomSizedTexture()` since my texture size is not the minecraft default 176x166 pixels texture size.
 
+I also suggest using GNU Image Manipulation Program (GIMP) or Adobe Photoshop to create your gui textures. You can also go into minecraft's source code, find the original png textures and start from there. It would save you tons of time if you have a template to start with.
+
 To add buttons to the gui, we have to initialize it in the `initGui()` method, create an if block with the button's id, and perform the actions for each buttons.
 
 It's also important to not offset the textures and buttons by absolute pixels, but rather use proportions based on the screen size. This is because each person has different monitor/screen sizes, and different UI size settings. If we uses absolute pixels to off set their position it's very easy to mess up the entire layout for a different window size setting.
 
-Warning: This class only runs on the CLIENT SIDE, so if you want to do stuff that would relate to the server side such as adding items into certain slots, you would have to send a packet to the server side and add the item over there or else your gui would have desyncing issues. I have an example of setting up packets and IMessages in [Networking]().
+Warning: This class only runs on the CLIENT SIDE, so if you want to do stuff that would relate to the server side such as adding items into certain slots, you would have to send a packet to the server side and add the item over there or else your gui would have desyncing issues. I have an example of setting up packets and IMessages in [Networking](https://github.com/apo11o-M/MCAerial_Mod/tree/master/src#networking).
 
 #### `IGuiHandler`
 The IGuiHandler provides the Synchronization of the slot contents between the server and client and lets you avoid having to create custom packets. Basically it provides an association between the Container on the server side and the GuiScreen on the client side.
