@@ -7,7 +7,9 @@ import rickwang577.mcaerial.init.ItemInit;
 import rickwang577.mcaerial.util.IHasModel;
 
 public class ItemBase extends Item implements IHasModel{
-
+	
+	public String[] recipe = new String[9];
+	
 	public ItemBase(String name) {
 		setUnlocalizedName(name);
 		setRegistryName(name);

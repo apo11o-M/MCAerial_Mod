@@ -20,8 +20,6 @@ import rickwang577.mcaerial.gui.draftingtableblock.GuiContainerDrafting;
 public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World worldIn, int parX, int parY, int parZ) {
-		//DEBUG
-		System.out.println("GuiHandler getServerGuiElement()");
 		if (ID == Main.GUI_ENUM.DRAFTING_TABLE.ordinal()) {
             return new ContainerDraftingTable(player.inventory, worldIn, parX, parY, parZ);
 		}
@@ -31,8 +29,6 @@ public class GuiHandler implements IGuiHandler {
 	
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World worldIn, int parX, int parY, int parZ){
-		//DEBUG
-		System.out.println("GuiHandler getClientGuiElement()");
 		if (ID == Main.GUI_ENUM.DRAFTING_TABLE.ordinal()) {
 			return new GuiContainerDrafting(player.inventory, worldIn, I18n.format("tile.draftingtable.name"), parX, parY, parZ);
 		}

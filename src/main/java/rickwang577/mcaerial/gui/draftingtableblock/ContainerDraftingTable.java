@@ -22,14 +22,11 @@ public class ContainerDraftingTable extends Container {
 	
     public InventoryDraftingResult outputInventory = new InventoryDraftingResult();
     public int outputSlotID;
-    //public InventoryPlayer playerInventory;
-    //private final World world;
-    
+    public InventoryPlayer playerInventory;
+    public World worldIn;
+
     public ContainerDraftingTable(InventoryPlayer parPlayerInventory, World worldIn, int parX, int parY, int parZ) {
-    	//DEBUG
-		System.out.println("ContainerDraftingTable Constructor");
-    	//this.world = worldIn;
-		
+    	
 		// initialize the slot for the crafting result
 		outputSlotID = addSlotToContainer(new Slot(outputInventory, 0, 185, 44)).slotNumber;
 		
@@ -44,93 +41,80 @@ public class ContainerDraftingTable extends Container {
     	// initialize the slots for the player's hotbar
         for(int hotbarSlotIndex = 0; hotbarSlotIndex < 9; ++hotbarSlotIndex) {
             addSlotToContainer(new Slot(parPlayerInventory, hotbarSlotIndex, 62 + hotbarSlotIndex * 18, 174));
-        }     
-    }
-
-    @Override
-    public void onCraftMatrixChanged(IInventory parInventory) {}
-
-    /**
-     * called when the player clicks the slot
-     * super.slotClick handles the different types of drag events
-     * The rest of the method handles what happen to the 
-     */
-    /*
-    public ItemStack slotClick(int parSlotId, int parMouseButtonId, ClickType parClickMode, EntityPlayer parPlayer) {
-        ItemStack clickItemStack = super.slotClick(parSlotId, parMouseButtonId, parClickMode, parPlayer);
-        if(inventorySlots.size() > parSlotId && parSlotId >= 0) {
-            if(inventorySlots.get(parSlotId) != null) {
-                if(((Slot)inventorySlots.get(parSlotId)).inventory == inputInventory) {
-                    onCraftMatrixChanged(inputInventory);
-                }
-            }
         }
-        return clickItemStack;
+        
+        playerInventory = parPlayerInventory;
+        this.worldIn = worldIn;
         
     }
-    */
-
-    @Override
-    public boolean canInteractWith(EntityPlayer player) {
-        return true;
-    }
 
     /**
-     * Called when a player shift-clicks on a slot.
+     * This method is called when the player wants moves an itemstack from one slot to another. This includes all types 
+     * of clicks(left clicks, right clicks, shift-clicks, and more). Failure to consider all the possibilities would result
+     * in weird inventory behaviors such as itemstacks dissapearing or even mc stuck in a infinite for loop.
+     * 
+     * mergeItemStack() is a method that merges the itemstack from the initial slot to the target slot. It returns true 
+     * if it successfully merge the items, and returns false if it does not(maybe the player's inventory is full, etc).
+     * 
+     * @return The itemstack that goes into the target slot 
      */
     @Override
     public ItemStack transferStackInSlot(EntityPlayer parPlayer, int parSlotIndex) {
+    	ItemStack itemstack = ItemStack.EMPTY;
+    	Slot slot = this.inventorySlots.get(parSlotIndex);
     	
-    	/*
-        Slot slot = (Slot) inventorySlots.get(parSlotIndex);
-        // If there is something in the stack to pick up
-        if (slot != null && slot.getHasStack())
-        {
-            // If the slot is one of the custom slots
-            if (slot.inventory.equals(inputInventory) || slot.inventory
-                   .equals(outputInventory))
-            {
-                // try to move to player inventory
-                if (!playerInventory.addItemStackToInventory(slot.getStack()))
-                {
-                    return null;
-                }
-                slot.putStack(null);
-                slot.onSlotChanged();
-            }
-            // if the slot is a player inventory slot
-            else if(slot.inventory.equals(playerInventory))
-            {
-                // DEBUG
-                System.out.println("Shift-clicked on player inventory slot");
-                // Try to transfer to input slot
-                if (!((Slot)inventorySlots.get(inputSlotNumber)).getHasStack())
-                {
-                    ((Slot)inventorySlots.get(inputSlotNumber)).putStack(slot.getStack());
-                    slot.putStack(null);
-                    slot.onSlotChanged();
-                }
-                else
-                {
-                    // DEBUG
-                    System.out.println("There is already something in the input slot");
-                }
-            }
-        }
-        return null;
-        */
-    	return null;
+    	// if there is stuff in this slot
+    	if (slot != null && slot.getHasStack()) {
+			ItemStack current = slot.getStack();
+			itemstack = current.copy();
+			
+			// if the slot is the drafting table result
+			if (slot.slotNumber == outputSlotID) {
+				// merge the itemstack from the custom slot to the player inventory
+				if (!this.mergeItemStack(current, 1, this.inventorySlots.size(), true)) {
+					// when you get here, it means you shift-clicked the empty drafting table slot u dum dum
+					System.out.println("hit first");
+					return ItemStack.EMPTY;
+				}
+			} else if (!this.mergeItemStack(current, 0, 1, false)){
+			// if the selected slot is the player's inventory
+				System.out.println("hit second");
+				return ItemStack.EMPTY;
+			}
+			
+			if (current.isEmpty()) {
+				slot.putStack(ItemStack.EMPTY);
+			} else {
+				slot.onSlotChanged();
+			}
+		}
+		return itemstack;
+		
+    }
+    
+    /**
+     * Drop the items if the container still have itemstacks in it.
+     */
+    @Override
+    public void onContainerClosed(EntityPlayer player) {	
     }
 
     @Override
     public boolean canMergeSlot(ItemStack parItemStack, Slot parSlot) {
         return !parSlot.inventory.equals(outputInventory);
     }
+    
+    @Override
+    public boolean canInteractWith(EntityPlayer player) {
+        return this.outputInventory.isUsableByPlayer(player);
+    }
 
+    
     @Override
     public Slot getSlot(int parSlotIndex) {
         if(parSlotIndex >= inventorySlots.size())
             parSlotIndex = inventorySlots.size() - 1;
         return super.getSlot(parSlotIndex);
     }
+    
 }

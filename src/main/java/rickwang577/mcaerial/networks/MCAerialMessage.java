@@ -43,7 +43,7 @@ public class MCAerialMessage implements IMessage {
 	@Override
 	public void fromBytes(ByteBuf buf) {
 	    // Reads the int back from the buf. Note that if you have multiple values, you must read in the same order you wrote.
-	    toSend = buf.getInt(0);
+	    toSend = buf.getInt(0);   
 	    x = buf.getInt(1);
 	    y = buf.getInt(2);
 	    z = buf.getInt(3);

@@ -28,9 +28,7 @@ public class DraftingTableBlock extends BlockBase {
     								EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
 		if (!worldIn.isRemote) {
-			//DEBUG
-	        System.out.println("BlockDeconstructor onBlockActivated");
-	        playerIn.openGui(Main.instance, Main.GUI_ENUM.DRAFTING_TABLE.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Main.instance, Main.GUI_ENUM.DRAFTING_TABLE.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
         return true;
     

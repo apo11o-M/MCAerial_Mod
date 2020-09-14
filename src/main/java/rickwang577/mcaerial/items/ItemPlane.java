@@ -19,30 +19,40 @@ import rickwang577.mcaerial.util.Reference;
 
 public class ItemPlane extends ItemBase  {
 	
-	// implements IHasModel
-	// remove the IHasModel for testing later
 	
 	public ItemPlane(String name) {
-		super(name);
-		System.out.println("name: " + name);
-
-
+		super(name);		
+		maxStackSize = 1;
+		recipeInit();
 	}
-	
-	
+
 	@Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, 
+    								  EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
 	        ItemStack itemstack = player.getHeldItem(hand);
 	        EntityPlane entityPlane = new EntityPlane(worldIn, (double)pos.getX() + 0.5, (double)pos.getY() + 1, (double)pos.getZ() + 0.5);
 	        worldIn.spawnEntity(entityPlane);
 	        itemstack.shrink(1);
 			return EnumActionResult.SUCCESS;
-
 		}
 		return EnumActionResult.FAIL;
 		
 	}
+	
+	private void recipeInit() {
+		recipe[0] = null;
+		recipe[1] = "minecraft:iron_ingot";
+		recipe[2] = null;
+		recipe[3] = "minecraft:iron_block";
+		recipe[4] = "minecraft:diamond";
+		recipe[5] = "minecraft:iron_block";
+		recipe[6] = "minecraft:iron_ingot";
+		recipe[7] = "minecraft:dispenser";
+		recipe[8] = "minecraft:iron_ingot";
+		
+	}
+	
 
+	
 }

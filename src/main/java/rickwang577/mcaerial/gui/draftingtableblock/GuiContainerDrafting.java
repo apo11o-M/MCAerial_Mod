@@ -5,12 +5,18 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import rickwang577.mcaerial.init.ItemInit;
 import rickwang577.mcaerial.items.ItemPlane;
+import rickwang577.mcaerial.networks.MCAerialMessage;
+import rickwang577.mcaerial.util.handlers.PacketHandler;
 
 /**
  * GuiContainer(Client side): This class specifies the layout of the gui, render the background images,
@@ -20,18 +26,22 @@ public class GuiContainerDrafting extends GuiContainer {
 	
 	private static final ResourceLocation DRAFTING_TABLE_TEXTURES = new ResourceLocation("mcaerial:textures/gui/drafting_table.png");
 	public ContainerDraftingTable container;
+	public EntityPlayer player;
 	private final String blockName;
+	private BlockPos pos;
 	private int page;
 	
 	public GuiContainerDrafting(InventoryPlayer playerInventory, World worldIn, String blockName, int parX, int parY, int parZ) {
 		super(new ContainerDraftingTable(playerInventory, worldIn, parX, parY, parZ));
 		container = (ContainerDraftingTable) inventorySlots;
+		player = playerInventory.player;
+		pos = new BlockPos(parX, parY, parZ);
 		this.blockName = blockName;
 		this.xSize = 284;
 		this.ySize = 213;
-		System.out.println("GuiContainerDrafting Constructor");
-		
-	}    
+		this.page = 1;
+			
+	}
 	
 	/**
 	 * Initialize the gui buttons.
@@ -47,33 +57,26 @@ public class GuiContainerDrafting extends GuiContainer {
 		
 	}
 	
+	/**
+	 * This controls what do to when the buttons are activated
+	 */
 	@Override
     protected void actionPerformed(GuiButton button) throws IOException {
 		if (button.id == 1) {
-			// if the button is "<<"
-			// do nothing for now
-			page = 1;
-			
+			// if the button is "<<", previous page
+			if (page > 1) {
+				--page;
+			}
 		} else if (button.id == 2) {
-			// if the button is ">>"
-			// do nothing for now
+			// if the button is ">>", next page
 			page = 2;
-			
+			if (page < 2) {
+				++page;
+			}
 		} else {
-			// if the button is "create"
-			System.out.println("actionPerformed");
-			// check if the player have enough materials for crafting that item
-			// check the current page
-			
-			//container.putStackInSlot(container.outputSlotID, new ItemStack(new ItemPlane()));
-			// if true
-				// fill the drafting result slot (outputInventory) with the selected item.
-				// and reduce the player's inventory.
-			// if false, do nothing
-			
-			
-			
-			
+			// send a crafting request to the server 
+			IMessage msg = new MCAerialMessage(page, pos);
+			PacketHandler.INSTANCE.sendToServer(msg);	
 		}
 	}
 	
