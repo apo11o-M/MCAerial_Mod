@@ -16,6 +16,11 @@ public class EntityGoKart extends GeneralEntity {
 
 	}
 	
+	public EntityGoKart(World worldIn, double parX, double parY, double parZ) {
+		this(worldIn);
+		this.setPosition(parX, parY, parZ);
+	}
+	
 	@Override
 	public void updateMotion() {
 		double rotX = GeneralEntity.getXVectorComp(this.rotationYaw, 0);

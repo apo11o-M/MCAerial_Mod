@@ -12,7 +12,7 @@ public class EntityInit {
 	
 	public static void registerEntities() {
 		registerEntity("go_kart", EntityGoKart.class, Reference.ENTITY_GO_KART, 50);
-		registerEntity("plane", EntityPlane.class, Reference.ENTITY_PLANE, 50);
+		registerEntity("meve", EntityPlane.class, Reference.ENTITY_PLANE, 50);
 
 		
 	}

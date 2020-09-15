@@ -19,7 +19,6 @@ import rickwang577.mcaerial.util.Reference;
 
 public class ItemPlane extends ItemBase  {
 	
-	
 	public ItemPlane(String name) {
 		super(name);		
 		maxStackSize = 1;
@@ -37,7 +36,6 @@ public class ItemPlane extends ItemBase  {
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.FAIL;
-		
 	}
 	
 	private void recipeInit() {

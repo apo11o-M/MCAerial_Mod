@@ -8,7 +8,8 @@ tile.drafting_table_block.name=Drafting Table
 //Items
 item.ruby.name=Ruby
 item.obsidian_orb.name=Obsidian Orb
-item.plane_spawn_egg.name=Plane
+item.meve.name=Meve
+item.go_kart.name=Go Kart
 
 
 //Tools
@@ -17,7 +18,7 @@ item.obsidian_sword.name=Obsidian Sword
 
 //Entity
 entity.go_kart.name=Go Kart
-entity.plane.name=Plane
+entity.plane.name=Meve
 
 
 //Creative Tabs

@@ -76,12 +76,12 @@ public class MCAerialMessage implements IMessage {
 		    switch (id) {
 		    	case 1 :
 		    	default :
-		    		item = new ItemStack(ItemInit.PLANE_SPAWN_EGG);
+		    		item = new ItemStack(ItemInit.GO_KART);
 		    		//flag = hasMaterials(item);		    		
 			    	//serverPlayer.inventory.hasItemStack(item);
 		    		break;
 		    	case 2 :
-		    		item = new ItemStack(BlockInit.FIREFLY_JAR_BLOCK);
+		    		item = new ItemStack(ItemInit.MEVE);
 		    		break;
 		    }
 		    

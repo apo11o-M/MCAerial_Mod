@@ -16,7 +16,7 @@ import rickwang577.mcaerial.util.Reference;
 
 public class RenderPlane extends Render<EntityPlane> {
 		
-	public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/entities/plane.png");
+	public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/entities/meve.png");
 	private ModelBase mainModel;
 	
 	public RenderPlane(RenderManager manager, ModelBase modelBaseIn) {
