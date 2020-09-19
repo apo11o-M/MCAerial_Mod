@@ -61,9 +61,9 @@ public class MCAerialMessage implements IMessage {
 	}
 	
 	
-	public static class MCAerialPacket implements IMessageHandler<MCAerialMessage, IMessage> {
+	public static class MCAerialIMessageHandler implements IMessageHandler<MCAerialMessage, IMessage> {
 		
-		public MCAerialPacket() {}
+		public MCAerialIMessageHandler() {}
 		
 		@Override 
 		public IMessage onMessage(MCAerialMessage message, MessageContext ctx) {

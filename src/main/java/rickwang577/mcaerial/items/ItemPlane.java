@@ -22,7 +22,6 @@ public class ItemPlane extends ItemBase  {
 	public ItemPlane(String name) {
 		super(name);		
 		maxStackSize = 1;
-		recipeInit();
 	}
 
 	@Override
@@ -38,19 +37,5 @@ public class ItemPlane extends ItemBase  {
 		return EnumActionResult.FAIL;
 	}
 	
-	private void recipeInit() {
-		recipe[0] = null;
-		recipe[1] = "minecraft:iron_ingot";
-		recipe[2] = null;
-		recipe[3] = "minecraft:iron_block";
-		recipe[4] = "minecraft:diamond";
-		recipe[5] = "minecraft:iron_block";
-		recipe[6] = "minecraft:iron_ingot";
-		recipe[7] = "minecraft:dispenser";
-		recipe[8] = "minecraft:iron_ingot";
-		
-	}
-	
-
 	
 }

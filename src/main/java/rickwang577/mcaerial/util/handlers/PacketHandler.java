@@ -4,18 +4,16 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import rickwang577.mcaerial.networks.MCAerialMessage;
-import rickwang577.mcaerial.networks.MCAerialMessage.MCAerialPacket;
+import rickwang577.mcaerial.networks.MCAerialMessage.MCAerialIMessageHandler;
 import rickwang577.mcaerial.util.Reference;
 
-//The params of the IMessageHandler are <REQ, REPLY>
-// This means that the first param is the packet you are receiving, and the second is the packet you are returning.
-// The returned packet can be used as a "response" from a sent packet.
+
 public class PacketHandler {
 	
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID.toUpperCase());
 
 	public static void initPackets() {
-		registerMessage(MCAerialMessage.class, MCAerialMessage.MCAerialPacket.class);
+		registerMessage(MCAerialMessage.class, MCAerialMessage.MCAerialIMessageHandler.class);
 		
 	}
 	

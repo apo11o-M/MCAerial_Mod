@@ -29,15 +29,18 @@ public class FireflyJarBlock extends BlockBase {
 		return false;
 	}
 	
+	
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 	
+	
 	@Override
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
+	
 	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -45,10 +48,4 @@ public class FireflyJarBlock extends BlockBase {
 	}
 	
 	
-	@Override
-	public void registerModels() {
-		
-		
-	}
-
 }
